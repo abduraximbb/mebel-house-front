@@ -1,0 +1,9 @@
+.header-animete{
+    margin-top: 24px;
+    animation: headerAnimte .25s ease 1s forwards;
+}
+@keyframes headerAnimte {
+    to{
+        margin-top: 0;
+    }
+}
