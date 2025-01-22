@@ -1,6 +1,9 @@
 import { memo } from "react";
 import { IGetResponseProducts, IProduct } from "../../types";
 
+const capitalize = (str: string) =>
+  str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+
 const Products = ({ data }: { data: IGetResponseProducts }) => {
   console.log(data);
 
@@ -23,10 +26,10 @@ const Products = ({ data }: { data: IGetResponseProducts }) => {
       </div>
       <div className="py-4 px-4 bg-[#F4F5F7] transition-colors duration-300">
         <h2
-          title={product.name}
+          title={capitalize(product.name)}
           className="line-clamp-1 text-[24px] font-semibold leading-8 max-[620px]:text-lg"
         >
-          {product.name}
+          {capitalize(product.name)}
         </h2>
         <p
           title={product.description}
