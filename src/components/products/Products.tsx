@@ -6,7 +6,6 @@ const capitalize = (str: string) =>
 
 const Products = ({ data }: { data: IGetProducts }) => {
   
-  console.log(data);
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
