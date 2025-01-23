@@ -4,6 +4,8 @@ import Hero from "./Hero";
 import Products from "../../components/products/Products";
 import Browse from "./Browse";
 import SwiperInfinite from "./swiper_infinite/swiper_infinite";
+import SlickRoomSlider from "./SLickRoomSlider";
+
 
 const Home = () => {
   const { data } = useGetProductsQuery({});
@@ -12,6 +14,7 @@ const Home = () => {
       <Hero />
       <Browse />
       {data && <Products data={data} />}
+      <SlickRoomSlider/>
       <SwiperInfinite/>
     </div>
   );
