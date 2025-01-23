@@ -16,15 +16,15 @@ const SwiperInfinite: React.FC = () => {
     <div className="w-full overflow-hidden bg-gray-100 py-6">
       <Swiper
         modules={[FreeMode, Autoplay]}
-        spaceBetween={10} 
+        spaceBetween={10}
         grabCursor={true}
         freeMode={true}
         speed={10000}
         loop={true}
-        slidesPerView="auto" 
+        slidesPerView="auto"
         autoplay={{
           delay: 0,
-          disableOnInteraction: false, 
+          disableOnInteraction: false,
         }}
         breakpoints={{
           0: { spaceBetween: 5 },
@@ -34,13 +34,12 @@ const SwiperInfinite: React.FC = () => {
         }}
         className="trusted-by-swiper"
       >
-        
         {images.map((image, index) => (
           <SwiperSlide key={index} className="flex justify-center items-center">
             <img
               src={image}
               alt={`Slide ${index + 1}`}
-              className="h-[721px] w-full object-contain" 
+              className="h-auto max-h-[90vh] w-auto object-contain mx-auto" 
             />
           </SwiperSlide>
         ))}
