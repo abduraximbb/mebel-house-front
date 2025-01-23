@@ -15,7 +15,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
   const ref = useOutsideClick(() => setSearchOpen(false));
   const navigate = useNavigate();
   const [value, setValue] = useState<string>("");
-  const debouncedValue = useDebounce(value.trim());
+  const debouncedValue = useDebounce(value.trim().toLowerCase());
   const { data, isSuccess, isFetching } = useGetProductsQuery(
     { limit: 10, filter: debouncedValue },
     { skip: !debouncedValue}
@@ -51,9 +51,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
           onChange={(e) => setValue(e.target.value)}
           className="w-full p-3 border  rounded-l-lg outline-none text-gray-700 text-sm"
         />
-        <button
-          className="p-3 border border-x-0 round hover:bg-amber-600 hover:border-amber-600 hover:text-white transition duration-300"
-        >
+        <button className="p-3 border border-x-0 round hover:bg-amber-600 hover:border-amber-600 hover:text-white transition duration-300">
           <FiSearch className="h-5 w-5" />
         </button>
         <button
@@ -65,19 +63,27 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
       </div>
       {
         // qidirilgan productslar
-        !isFetching && value.trim() && isSuccess && 
-        <div className=" max-w-2xl w-full flex flex-col gap-1">
-          {data?.data?.map((product: IProduct) => (
-            <Link onClick={handlClose} className="flex items-center gap-3 border-b p-1 hover:bg-slate-100 last:border-b-0" to={`/product/${product.id}`}>
-              <img src={import.meta.env.VITE_BASE_IMAGE_URL + product.images[0]} alt={product.name} className="w-12 h-12 object-contain" />
-              <span>{product.name}</span>
-            </Link>
-          ))}
-        </div>
+        !isFetching && value.trim() && isSuccess && (
+          <div className=" max-w-2xl w-full flex flex-col gap-1">
+            {data?.data?.map((product: IProduct) => (
+              <Link
+                key={product.id}
+                onClick={handlClose}
+                className="flex items-center gap-3 border-b p-1 hover:bg-slate-100 last:border-b-0"
+                to={`/product/${product.id}`}
+              >
+                <img
+                  src={import.meta.env.VITE_BASE_IMAGE_URL + product.images[0]}
+                  alt={product.name}
+                  className="w-12 h-12 object-contain"
+                />
+                <span>{product.name}</span>
+              </Link>
+            ))}
+          </div>
+        )
       }
-      {
-        // taklif qilinyotgan keylar
-        !value.trim() && (
+      {!value.trim() && (
         <div className="flex flex-wrap gap-3 max-w-2xl justify-center">
           {[
             "Sofa",
@@ -99,17 +105,19 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
           ))}
         </div>
       )}
-      { 
-      // loading
-      isFetching && <CircularProgress />
+
+      {
+        // loading
+        isFetching && <CircularProgress />
       }
       {
         // not found
-      !data?.total && isSuccess && value.trim() && !isFetching && (
-        <div>
-          <p className="text-red-500">Product not found</p>
-        </div>
-      )}
+        !data?.total && isSuccess && value.trim() && !isFetching && (
+          <div>
+            <p className="text-red-500">Product not found</p>
+          </div>
+        )
+      }
     </div>
   );
 };
