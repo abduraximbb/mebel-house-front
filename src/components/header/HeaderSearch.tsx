@@ -67,7 +67,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
         // qidirilgan productslar
         !isFetching && value.trim() && isSuccess && 
         <div className=" max-w-2xl w-full flex flex-col gap-1">
-          {data?.data?.products?.map((product: IProduct) => (
+          {data?.data?.map((product: IProduct) => (
             <Link onClick={handlClose} className="flex items-center gap-3 border-b p-1 hover:bg-slate-100 last:border-b-0" to={`/product/${product.id}`}>
               <img src={import.meta.env.VITE_BASE_IMAGE_URL + product.images[0]} alt={product.name} className="w-12 h-12 object-contain" />
               <span>{product.name}</span>
@@ -105,7 +105,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
       }
       {
         // not found
-      !data?.data?.total && isSuccess && value.trim() && !isFetching && (
+      !data?.total && isSuccess && value.trim() && !isFetching && (
         <div>
           <p className="text-red-500">Product not found</p>
         </div>

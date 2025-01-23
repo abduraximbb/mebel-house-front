@@ -1,18 +1,17 @@
 import { memo } from "react";
-import { IGetResponseProducts, IProduct } from "../../types";
+import { IGetProducts, IProduct } from "../../types";
 
 const capitalize = (str: string) =>
   str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
 
-const Products = ({ data }: { data: IGetResponseProducts }) => {
-  console.log(data);
-
+const Products = ({ data }: { data: IGetProducts }) => {
+  
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
       className="relative group overflow-hidden rounded-lg shadow-md"
     >
-      <div className="relative w-full h-[301px] max-[620px]:h-[240px]  max-[430px]:h-[200px]">
+      <div className="relative w-full h-[301px] max-[620px]:h-[240px] max-[430px]:h-[200px]">
         <img
           className="w-full h-full bg-no-repeat bg-center bg-cover"
           src={`${import.meta.env.VITE_BASE_IMAGE_URL}${product.images[0]}`}

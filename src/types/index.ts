@@ -4,9 +4,9 @@ export interface IGetResponseProducts {
   statusCode: number;
 }
 export interface IGetProducts {
+  data: IProduct[]; 
   limit: number;
   page: number;
-  products: IProduct[];
   total: number;
 }
 export interface IProduct {
