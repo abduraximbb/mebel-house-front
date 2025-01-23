@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { links } from "../../static";
-import logo from "/logo.svg";
+import logo from "@/assets/images/logo.png";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { LuUser } from "react-icons/lu";
