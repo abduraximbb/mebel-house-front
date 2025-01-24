@@ -18,12 +18,12 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
   const debouncedValue = useDebounce(value.trim().toLowerCase());
   const { data, isSuccess, isFetching } = useGetProductsQuery(
     { limit: 10, filter: debouncedValue },
-    { skip: !debouncedValue}
+    { skip: !debouncedValue }
   );
-  const handlClose = ()=> {
-    setSearchOpen(false)
-    setValue("")
-  }
+  const handlClose = () => {
+    setSearchOpen(false);
+    setValue("");
+  };
 
   return (
     <div
@@ -51,12 +51,12 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
           onChange={(e) => setValue(e.target.value)}
           className="w-full p-3 border  rounded-l-lg outline-none text-gray-700 text-sm"
         />
-        <button className="p-3 border border-x-0 round hover:bg-amber-600 hover:border-amber-600 hover:text-white transition duration-300">
+        <button className="p-3 border border-x-0 round hover:bg-yellow-700  hover:border-amber-600 hover:text-white transition duration-300">
           <FiSearch className="h-5 w-5" />
         </button>
         <button
           onClick={() => setSearchOpen(false)}
-          className="p-3 text-[14.5px] bg-red-500 text-white rounded-r-lg hover:bg-red-600 transition duration-300"
+          className="p-3 text-[14.5px] bg-bg-primary text-white rounded-r-lg  transition hover:bg-yellow-700 duration-300"
         >
           Cancel
         </button>
