@@ -1,15 +1,17 @@
 import { configureStore } from '@reduxjs/toolkit'
-import counterSlice from './features/counter-slice'
 import { mainApi } from './api'
+import tokenSlice from './features/token-slice';
+import otpSlice from './features/otp-slice';
 
 export const store = configureStore({
   reducer: {
-    counter: counterSlice,
+    otp: otpSlice,
+    token: tokenSlice,
     [mainApi.reducerPath]: mainApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(mainApi.middleware),
-})
+});
 
 export type RootState = ReturnType<typeof store.getState>
 export type AppDispatch = typeof store.dispatch
