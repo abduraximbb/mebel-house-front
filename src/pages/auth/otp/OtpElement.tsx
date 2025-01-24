@@ -119,6 +119,7 @@ export default function OTP({
     event: React.MouseEvent<HTMLInputElement, MouseEvent>,
     currentIndex: number
   ) => {
+    console.log(event);
     selectInput(currentIndex);
   };
 

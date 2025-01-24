@@ -1,5 +1,5 @@
-import { ICustomer } from '@/types';
-import { mainApi } from './index'
+import { ICustomer } from "@/types";
+import { mainApi } from "./index";
 
 const extendedApi = mainApi.injectEndpoints({
   endpoints: (build) => ({
@@ -12,7 +12,7 @@ const extendedApi = mainApi.injectEndpoints({
     }),
     checkToken: build.query<any, any>({
       query: () => ({
-        url: "customer/auth/check-token",
+        url: "auth/client-profile",
         method: "GET",
       }),
     }),
@@ -23,9 +23,12 @@ const extendedApi = mainApi.injectEndpoints({
         body,
       }),
     }),
-    verifyOtp: build.mutation<any, { email: string; verification_key:string; otp: string }>({
+    verifyOtp: build.mutation<
+      any,
+      { email: string; verification_key: string; otp: string }
+    >({
       query: (body) => ({
-        url:'auth/verifyotp',
+        url: "auth/verifyotp",
         method: "POST",
         body,
       }),
@@ -33,4 +36,9 @@ const extendedApi = mainApi.injectEndpoints({
   }),
 });
 
-export const { useCreateCustomerMutation, useCreateOtpMutation, useVerifyOtpMutation, useCheckTokenQuery } = extendedApi;
+export const {
+  useCreateCustomerMutation,
+  useCreateOtpMutation,
+  useVerifyOtpMutation,
+  useCheckTokenQuery,
+} = extendedApi;
