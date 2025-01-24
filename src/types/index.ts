@@ -4,7 +4,7 @@ export interface IGetResponseProducts {
   statusCode: number;
 }
 export interface IGetProducts {
-  data: IProduct[]; 
+  data: IProduct[];
   limit: number;
   page: number;
   total: number;
@@ -26,6 +26,14 @@ export interface IProductQuery {
   page?: number;
   limit?: number;
   price?: "asc" | "desc";
+}
+
+export interface ICustomer {
+  full_name: string;
+  phone_number: string;
+  email: string;
+  password: string;
+  confirm_password: string;
 }
 
 // export interface IGetResponseProducts {
