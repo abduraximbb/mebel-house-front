@@ -6,7 +6,6 @@ import Browse from "./Browse";
 import SwiperInfinite from "./swiper_infinite/swiper_infinite";
 import SlickRoomSlider from "./SLickRoomSlider";
 
-
 const Home = () => {
   const { data } = useGetProductsQuery({});
   return (
@@ -14,8 +13,8 @@ const Home = () => {
       <Hero />
       <Browse />
       {data && <Products data={data} />}
-      <SlickRoomSlider/>
-      <SwiperInfinite/>
+      <SlickRoomSlider />
+      <SwiperInfinite />
     </div>
   );
 };
