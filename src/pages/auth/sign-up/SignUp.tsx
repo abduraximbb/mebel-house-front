@@ -2,10 +2,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ICustomer } from "@/types";
-import {
-  useCreateCustomerMutation,
-  useCreateOtpMutation,
-} from "@/redux/api/customer-api";
+import { useCreateCustomerMutation } from "@/redux/api/customer-api";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";

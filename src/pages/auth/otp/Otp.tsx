@@ -22,17 +22,14 @@ export default function OTPInput() {
   const [otp, setOtp] = React.useState("");
   const [reload, setReload] = React.useState(true);
   const [verifyOtp, { isLoading, isError, isSuccess }] = useVerifyOtpMutation();
-  const [
-    createOtp,
-    { isLoading: otpLoading, isError: otpError, isSuccess: otpSuccess, error },
-  ] = useCreateOtpMutation();
+  const [createOtp, { isLoading: otpLoading, isError: otpError, error }] =
+    useCreateOtpMutation();
   const navigate = useNavigate();
 
   const createNewOtp = () => {
     createOtp({ email: email });
     setReload(!reload);
     console.log(email, reload);
-    
   };
 
   React.useEffect(() => {
