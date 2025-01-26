@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { links } from "../../static";
-import logo from "/logo.svg";
+import logo from "@/assets/logo.png";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import { FiSearch } from "react-icons/fi";
 import { LuUser } from "react-icons/lu";
@@ -30,7 +30,7 @@ const Header = () => {
         >
           <img src={logo} alt="logo.svg" className="h-14 w-14 cursor-pointer" />
           <h2 className="ml-1 text-[30px] font-montserrat font-semibold cursor-pointer">
-            Furnishings
+            Mebel House
           </h2>
         </div>
         <div className="flex items-center gap-12 max-[986px]:hidden">

@@ -1,7 +1,7 @@
 import { useOutsideClick } from "@/hooks/useOutsideClick";
 import React, { FC, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import logo from "/logo.svg";
+import logo from "@/assets/logo_search.png";
 import { FiSearch } from "react-icons/fi";
 import { useGetProductsQuery } from "@/redux/api/product-api";
 import { IProduct } from "@/types";
@@ -40,7 +40,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
       >
         <img src={logo} alt="logo.svg" />
         <h2 className="ml-1 text-[30px] font-montserrat font-semibold cursor-pointer">
-          Furnishings
+          Mebel House
         </h2>
       </div>
       <div className="flex items-center w-full max-w-2xl">
@@ -62,7 +62,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
         </button>
       </div>
       {
-        // qidirilgan productslar
+        
         !isFetching && value.trim() && isSuccess && (
           <div className=" max-w-2xl w-full flex flex-col gap-1">
             {data?.data?.map((product: IProduct) => (
@@ -107,11 +107,11 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
       )}
 
       {
-        // loading
+       
         isFetching && <CircularProgress />
       }
       {
-        // not found
+       
         !data?.total && isSuccess && value.trim() && !isFetching && (
           <div>
             <p className="text-red-500">Product not found</p>

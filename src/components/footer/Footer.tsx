@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="w-full bg-white py-16">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {/* Company Info */}
+         
           <div className="space-y-4">
             <h2 className="text-2xl font-semibold">Funiro.</h2>
             <address className="not-italic text-gray-600">
@@ -15,9 +15,9 @@ export default function Footer() {
             </address>
           </div>
 
-          {/* Links */}
+         
           <div className="space-y-8">
-            <h3 className="text-gray-500 text-[#9F9F9F]">Links</h3>
+            <h3 className="text-gray-500">Links</h3>
             <nav className="flex flex-col space-y-3">
               <a href="/" className="text-gray-900 hover:underline">
                 Home
@@ -34,9 +34,9 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Help */}
+      
           <div className="space-y-8">
-            <h3 className="text-gray-500 text-[#9F9F9F]">Help</h3>
+            <h3 className="text-gray-500">Help</h3>
             <nav className="flex flex-col space-y-3">
               <a
                 href="/paynet-options"
@@ -56,9 +56,9 @@ export default function Footer() {
             </nav>
           </div>
 
-          {/* Newsletter */}
+         
           <div className="space-y-8">
-            <h3 className="text-gray-500 text-[#9F9F9F]">Newsletter</h3>
+            <h3 className="text-gray-500">Newsletter</h3>
             <form className="flex flex-wrap gap-2">
               <input
                 type="email"
@@ -75,7 +75,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Copyright */}
+    
         <div className="mt-12 border-t border-gray-100 pt-8">
           <p className="text-gray-600 text-center md:text-left">
             2023 furino. All rights reserved
