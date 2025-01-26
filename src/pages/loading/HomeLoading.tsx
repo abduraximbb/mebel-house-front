@@ -3,10 +3,10 @@ import React from "react";
 const HomeLoading = () => {
   return (
     <div className="animate-pulse flex flex-col space-y-6 min-h-screen bg-gray-100 p-4">
-      {/* Hero Section */}
+      {}
       <div className="h-[716px] bg-gray-300 rounded-lg max-[768px]:h-[400px]"></div>
 
-      {/* Browse The Range Section */}
+      {}
       <div className="flex flex-col items-center space-y-6">
         <div className="h-6 w-48 bg-gray-300 rounded-lg mb-4"></div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-[1240px] w-full">
@@ -16,7 +16,7 @@ const HomeLoading = () => {
         </div>
       </div>
 
-      {/* Our Products Section */}
+      {}
       <div className="flex flex-col space-y-6">
         <div className="h-6 w-48 bg-gray-300 rounded-lg"></div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-[768px]:grid-cols-2 max-[640px]:grid-cols-1">
@@ -29,7 +29,7 @@ const HomeLoading = () => {
         </div>
       </div>
 
-      {/* 50+ Beautiful Rooms Inspiration Section */}
+      {}
       <div className="flex flex-col space-y-6">
         <div className="h-6 w-64 bg-gray-300 rounded-lg"></div>
         <div className="h-[482px] bg-gray-300 rounded-lg max-[768px]:h-[350px] max-[640px]:h-[300px]"></div>
@@ -39,7 +39,7 @@ const HomeLoading = () => {
         </div>
       </div>
 
-      {/* Infinite Swiper Section */}
+      {}
       <div className="w-full h-40 bg-gray-300 rounded-lg max-[640px]:h-32"></div>
     </div>
   );
