@@ -42,13 +42,13 @@ const SignIn = () => {
     login(data)
       .unwrap()
       .then((res) => {
-        console.log("Login response:", res);
+        // console.log("Login response:", res);
         toast.success("Welcome back!", { position: "bottom-right" });
         dispatch(saveToken(res.access_token));
         navigate("/auth/profile"); // Redirect qilish
       })
       .catch((err) => {
-        console.error("Login error:", err);
+        // console.error("Login error:", err);
         const msg = err?.data?.message || "Login failed. Please try again.";
         toast.error(Array.isArray(msg) ? msg[0] : msg, {
           position: "bottom-right",
