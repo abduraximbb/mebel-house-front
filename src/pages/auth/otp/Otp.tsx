@@ -26,11 +26,23 @@ export default function OTPInput() {
     useCreateOtpMutation();
   const navigate = useNavigate();
 
-  const createNewOtp = () => {
-    createOtp({ email: email });
-    setReload(!reload);
-    console.log(email, reload);
-  };
+  // const createNewOtp = () => {
+  //   createOtp({ email: email });
+  //   setReload(!reload);
+  //   // console.log(email, reload);
+  // };
+
+    const handleResendOtp = () => {
+      createOtp({ email })
+        .unwrap()
+        .then((res) => {
+          sessionStorage.setItem("verification_key", res.verification_key);
+          setReload(!reload);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    };
 
   React.useEffect(() => {
     // createOtp({ email: email });
@@ -44,16 +56,16 @@ export default function OTPInput() {
       verifyOtp({
         email,
         otp,
-        verification_key,
+        verification_key: String(sessionStorage.getItem('verification_key')),
       })
-        .unwrap()
-        .then((res) => {
-          setTimeout(() => {
-            dispatch(clearOtp());
-          }, 300);
-          dispatch(saveToken(res.access_token));
-          navigate("/auth/profile");
-        });
+      .unwrap()
+      .then((res) => {
+        setTimeout(() => {
+          dispatch(clearOtp());
+        }, 300);
+        dispatch(saveToken(res.access_token));
+        navigate("/auth/profile");
+      });
     }
   }, [otp]);
 
@@ -115,13 +127,133 @@ export default function OTPInput() {
             <CircularProgress sx={{ color: "#999" }} size={30} />
           </div>
         )}
-        <Timer
+        {/* <Timer
           reload={reload}
           callback={createNewOtp}
           time={120}
+          className="mt-6 text-gray-500"
+        /> */}
+        <Timer
+          time={120}
+          callback={handleResendOtp}
+          reload={reload}
           className="mt-6 text-gray-500"
         />
       </Box>
     </Box>
   );
 }
+
+
+
+// import React, { useState } from "react";
+// import { Box } from "@mui/system";
+// import { CircularProgress, Typography } from "@mui/material";
+// import {
+//   useCreateOtpMutation,
+//   useVerifyOtpMutation,
+// } from "@/redux/api/customer-api";
+// import { Link, useNavigate } from "react-router-dom";
+// import { useDispatch, useSelector } from "react-redux";
+// import { RootState } from "@/redux";
+// import { saveToken } from "@/redux/features/token-slice";
+// import Timer from "./Timer";
+// import { clearOtp } from "@/redux/features/otp-slice";
+// import OTP from "./OtpElement";
+
+// const OTPInput: React.FC = () => {
+//   const { email, verification_key } = useSelector(
+//     (state: RootState) => state.otp
+//   );
+//   const dispatch = useDispatch();
+//   const navigate = useNavigate();
+
+//   const [otp, setOtp] = useState("");
+//   const [reload, setReload] = useState(false);
+
+//   const [verifyOtp, { isLoading, isError, isSuccess }] = useVerifyOtpMutation();
+//   const [createOtp, { isLoading: otpLoading, isError: otpError }] =
+//     useCreateOtpMutation();
+
+//   const handleOtpChange = (value: string) => {
+//     setOtp(value);
+//   };
+
+//   const handleOtpSubmit = () => {
+//     verifyOtp({ email, verification_key, otp })
+//       .unwrap()
+//       .then((res) => {
+//         dispatch(saveToken({ token: res.token }));
+//         dispatch(clearOtp());
+//         navigate("/");
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//       });
+//   };
+
+  // const handleResendOtp = () => {
+  //   createOtp({ email })
+  //     .unwrap()
+  //     .then((res) => {
+  //       sessionStorage.setItem("verification_key", res.verification_key);
+  //       setReload(!reload);
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
+
+//   if (!email || !verification_key) {
+//     return <Navigate to="/auth/sign-up" />;
+//   }
+
+//   return (
+//     <Box
+//       sx={{
+//         maxWidth: 400,
+//         margin: "auto",
+//         textAlign: "center",
+//         padding: "1.5rem",
+//         border: "1px solid #ddd",
+//         borderRadius: "8px",
+//       }}
+//     >
+//       <Typography variant="h5" mb={2}>
+//         Verify OTP
+//       </Typography>
+//       <Typography variant="body1" mb={4}>
+//         We have sent a verification code to your email: <b>{email}</b>
+//       </Typography>
+//       <OTP value={otp} onChange={handleOtpChange} />
+//       <button
+//         onClick={handleOtpSubmit}
+//         disabled={isLoading || otp.length < 6}
+//         className="btn btn-primary mt-4 w-full"
+//       >
+//         {isLoading ? <CircularProgress size={20} /> : "Submit"}
+//       </button>
+//       {isError && (
+//         <Typography color="error" mt={2}>
+//           Invalid OTP. Please try again.
+//         </Typography>
+//       )}
+//       <Timer time={60} callback={handleResendOtp} reload={reload} />
+//       {otpLoading && (
+//         <Typography variant="body2" mt={2}>
+//           Resending OTP...
+//         </Typography>
+//       )}
+//       {otpError && (
+//         <Typography color="error" mt={2}>
+//           Failed to resend OTP. Please try again.
+//         </Typography>
+//       )}
+//       <Link to="/auth/sign-up" className="text-sm text-blue-500 mt-4 block">
+//         Back to Sign Up
+//       </Link>
+//     </Box>
+//   );
+// };
+
+// export default OTPInput;
