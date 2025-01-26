@@ -14,7 +14,7 @@ import { clearOtp } from "@/redux/features/otp-slice";
 import OTP from "./OtpElement";
 
 export default function OTPInput() {
-  const { email, verification_key } = useSelector(
+  const { email } = useSelector(
     (state: RootState) => state.otp
   );
   const dispatch = useDispatch();
