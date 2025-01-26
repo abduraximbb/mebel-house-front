@@ -35,7 +35,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const [createCustomer] = useCreateCustomerMutation();
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // State for confirm password toggle
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
 
   const {
     register,

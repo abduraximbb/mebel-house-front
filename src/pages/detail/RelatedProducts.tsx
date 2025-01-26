@@ -32,7 +32,7 @@ const RelatedProducts = ({ data }: { data: IGetProducts }) => {
             key={product.id}
             className="relative group overflow-hidden rounded-xl shadow-xl bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
-            {/* Product Image with hover effect */}
+         
             <Link to={`/product/${product.id}`} onClick={handleProductClick}>
               <div className="relative w-full h-[350px] sm:h-[300px] md:h-[320px] lg:h-[350px] block">
                 <img
@@ -40,9 +40,9 @@ const RelatedProducts = ({ data }: { data: IGetProducts }) => {
                   src={`${import.meta.env.VITE_BASE_IMAGE_URL}${product.images[0]}`}
                   alt={product.name}
                 />
-                {/* Hover effect for buttons */}
+         
                 <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 flex-col">
-                  {/* View Product Button */}
+          
                   <Link
                     to={`/product/${product.id}`}
                     className="bg-white p-3 rounded-full text-primary hover:bg-primary-light transition mb-3"
@@ -50,7 +50,6 @@ const RelatedProducts = ({ data }: { data: IGetProducts }) => {
                     View Product
                   </Link>
 
-                  {/* Other buttons: Cart, Compare, Heart */}
                   <div className="flex gap-4">
                     <button className="bg-white p-3 rounded-full text-primary hover:bg-primary-light transition">
                       <IoCartOutline className="text-xl text-primary" />
@@ -66,7 +65,7 @@ const RelatedProducts = ({ data }: { data: IGetProducts }) => {
               </div>
             </Link>
 
-            {/* Product Details */}
+            
             <div className="py-5 px-4 bg-[#F8F9FA] transition-colors duration-300">
               <h3
                 title={product.name}

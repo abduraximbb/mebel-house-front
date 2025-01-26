@@ -93,7 +93,7 @@ const ProductDetail = () => {
           </div>
         </div>
 
-        {/* Right Section */}
+       
         <div>
           <h1 className="text-4xl font-bold text-gray-800 dark:text-black">
             {product.name}
@@ -131,7 +131,7 @@ const ProductDetail = () => {
               <span className="px-4 text-lg font-semibold">{quantity}</span>
               <button
                 className="px-4 py-2 text-lg font-semibold hover:bg-gray-100"
-                onClick={() => setQuantity((prev) => prev + 1)} // Correct placement of parentheses
+                onClick={() => setQuantity((prev) => prev + 1)} 
               >
                 +
               </button>
