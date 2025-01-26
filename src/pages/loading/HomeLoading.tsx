@@ -1,5 +1,3 @@
-import React from "react";
-
 const HomeLoading = () => {
   return (
     <div className="animate-pulse flex flex-col space-y-6 min-h-screen bg-gray-100 p-4">
