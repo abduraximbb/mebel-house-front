@@ -36,6 +36,12 @@ export interface ICustomer {
   confirm_password: string;
 }
 
+export interface ISignInCustomer {
+  email: string;
+  password: string;
+}
+
+
 // export interface IGetResponseProducts {
 //   data: IGetProducts;
 //   message: string;
