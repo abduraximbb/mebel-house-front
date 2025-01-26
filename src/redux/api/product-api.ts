@@ -1,4 +1,4 @@
-import { IGetProducts, IProductQuery } from "@/types";
+import { IGetProducts, IProduct, IProductQuery } from "@/types";
 import { mainApi } from "./index";
 
 const extendedApi = mainApi.injectEndpoints({
@@ -10,7 +10,14 @@ const extendedApi = mainApi.injectEndpoints({
         params,
       }),
     }),
+     getProductById: build.query<IProduct, any>({
+      query: (params) => ({
+        url: "product/:id",
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = extendedApi;
+export const { useGetProductsQuery,useGetProductByIdQuery } = extendedApi;

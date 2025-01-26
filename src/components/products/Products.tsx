@@ -1,42 +1,62 @@
 import { memo } from "react";
-import { IGetProducts, IProduct } from "../../types";
-
-const capitalize = (str: string) =>
-  str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+import { Link } from "react-router-dom";
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IoCartOutline } from "react-icons/io5";
+import { IGetProducts, IProduct } from "@/types";
 
 const Products = ({ data }: { data: IGetProducts }) => {
-  
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
-      className="relative group overflow-hidden rounded-lg shadow-md"
+      className="relative group overflow-hidden rounded-xl shadow-xl bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
     >
-      <div className="relative w-full h-[301px] max-[620px]:h-[240px] max-[430px]:h-[200px]">
+      {/* Product Image with hover effect */}
+      <div className="relative w-full h-[350px] sm:h-[300px] md:h-[320px] lg:h-[350px] block">
         <img
-          className="w-full h-full bg-no-repeat bg-center bg-cover"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 group-hover:opacity-80"
           src={`${import.meta.env.VITE_BASE_IMAGE_URL}${product.images[0]}`}
           alt={product.name}
         />
+        {/* Hover effect for buttons */}
+        <div className="absolute inset-0 bg-black bg-opacity-40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4 flex-col">
+          {/* View Product Button (top position) */}
+          <Link
+            to={`/product/${product.id}`}
+            className="bg-slate-300 p-3 rounded-lg text-primary hover:bg-primary-light transition mb-3"
+          >
+            View Product
+          </Link>
+
+          {/* Other buttons: Cart, Compare, Heart */}
+          <div className="flex gap-4">
+            <button className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition">
+              <IoCartOutline className="text-xl text-primary" />
+            </button>
+            <button className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition">
+              Compare
+            </button>
+            <button className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition">
+                <IoMdHeartEmpty className="text-xl text-primary" />
+              </button>
+          </div>
+        </div>
       </div>
-      <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-        <button className="bg-white text-black px-4 py-2 rounded-md">
-          Add to cart
-        </button>
-      </div>
-      <div className="py-4 px-4 bg-[#F4F5F7] transition-colors duration-300">
+
+      {/* Product Details */}
+      <div className="py-5 px-4 bg-[#F8F9FA] transition-colors duration-300">
         <h2
-          title={capitalize(product.name)}
-          className="line-clamp-1 text-[24px] font-semibold leading-8 max-[620px]:text-lg"
+          title={product.name}
+          className="text-xl font-semibold text-gray-900 truncate max-[620px]:text-lg"
         >
-          {capitalize(product.name)}
+          {product.name}
         </h2>
         <p
           title={product.description}
-          className="line-clamp-1 text-[#898989] text-lg max-[620px]:text-sm"
+          className="text-sm text-[#333] mt-2 truncate max-[620px]:text-xs"
         >
           {product.description}
         </p>
-        <strong className="text-[#3A3A3A] text-[20px] leading-8 font-semibold max-[620px]:text-[15px]">
+        <strong className="text-xl text-gray-900 mt-4 font-semibold">
           {product.price.toLocaleString()} USD
         </strong>
       </div>
@@ -44,12 +64,26 @@ const Products = ({ data }: { data: IGetProducts }) => {
   ));
 
   return (
-    <div className="container my-14 max-[620px]:my-4">
-      <h2 className="font-poppins-bold text-[40px] mb-8 text-center max-[620px]:text-2xl">
-        Our products
+    <div className="container my-12 px-4 max-[620px]:my-6 max-[620px]:px-2">
+      {/* Section Title */}
+      <h2 className="font-poppins-bold text-4xl mb-10 text-center text-gray-900">
+        Our Featured Products
       </h2>
-      <div className="grid grid-cols-4 gap-8 max-[1240px]:grid-cols-3 max-[990px]:grid-cols-2 max-[620px]:gap-2">
+
+      {/* Product Grid */}
+      <div className="grid grid-cols-4 gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-[620px]:gap-4 max-[620px]:grid-cols-1">
         {productItems}
+      </div>
+
+      {/* See More Button */}
+      <div className="text-center mt-10">
+       <Link
+        to="/shop"
+        className="text-primary border-2 border-bg-primary bg-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-primary hover:text-bg-primary transition"
+      >
+        See More
+      </Link>
+
       </div>
     </div>
   );
