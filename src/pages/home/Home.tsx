@@ -5,16 +5,24 @@ import Products from "../../components/products/Products";
 import Browse from "./Browse";
 import SwiperInfinite from "./swiper_infinite/swiper_infinite";
 import SlickRoomSlider from "./SLickRoomSlider";
+import HomeLoading from "../loading/HomeLoading";
 
 const Home = () => {
-  const { data } = useGetProductsQuery({});
+  const { data, isLoading } = useGetProductsQuery({});
+
   return (
     <div>
-      <Hero />
-      <Browse />
-      {data && <Products data={data} />}
-      <SlickRoomSlider />
-      <SwiperInfinite />
+      {isLoading ? (
+        <HomeLoading />
+      ) : (
+        <>
+          <Hero />
+          <Browse />
+          {data && <Products data={data} />}
+          <SlickRoomSlider />
+          <SwiperInfinite />
+        </>
+      )}
     </div>
   );
 };
