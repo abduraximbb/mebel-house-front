@@ -2,6 +2,7 @@ import { SuspenseContainer } from "@/config";
 import Auth from "@/pages/auth/Auth";
 import Otp from "@/pages/auth/otp/Otp";
 import Profile from "@/pages/auth/profile/Profile";
+import MainDetail from "@/pages/detail/MainDetail";
 import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import SignIn from "../pages/auth/sign-in/SignIn";
@@ -58,6 +59,15 @@ const Routers = () => {
               ],
             },
 
+              {
+              path: "product/:id",
+              element: (
+                <SuspenseContainer>
+                  <MainDetail />
+                </SuspenseContainer>
+              ),
+              
+            },
             {
               path: "*",
               element: (
@@ -65,7 +75,10 @@ const Routers = () => {
                   <NotFound />
                 </SuspenseContainer>
               ),
+              
             },
+            
+          
           ],
         },
         {

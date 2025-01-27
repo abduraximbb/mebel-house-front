@@ -35,6 +35,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const [createCustomer] = useCreateCustomerMutation();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
 
   const {
     register,
@@ -152,7 +153,7 @@ const SignUp = () => {
                     src={showPassword ? openEye : closeEye}
                     className="absolute w-6 h-6 cursor-pointer right-2.5 top-5"
                     onClick={() => setShowPassword(!showPassword)}
-                    alt=""
+                    alt="Toggle password visibility"
                   />
                 </div>
                 {errors.password && (
@@ -168,13 +169,23 @@ const SignUp = () => {
                 >
                   Confirm Password
                 </label>
-                <input
-                  {...register("confirm_password")}
-                  type="password"
-                  id="confirm_password"
-                  placeholder="••••••••"
-                  className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
-                />
+                <div className="relative">
+                  <input
+                    {...register("confirm_password")}
+                    type={showConfirmPassword ? "text" : "password"}
+                    id="confirm_password"
+                    placeholder="••••••••"
+                    className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
+                  />
+                  <img
+                    src={showConfirmPassword ? openEye : closeEye}
+                    className="absolute w-6 h-6 cursor-pointer right-2.5 top-5"
+                    onClick={() =>
+                      setShowConfirmPassword(!showConfirmPassword)
+                    }
+                    alt="Toggle confirm password visibility"
+                  />
+                </div>
                 {errors.confirm_password && (
                   <div className="text-red-600 font-medium text-sm text-right">
                     {errors.confirm_password.message}
