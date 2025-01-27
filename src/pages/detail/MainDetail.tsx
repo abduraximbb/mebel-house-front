@@ -1,6 +1,6 @@
 import ProductDetail from "./ProductDetail";
 import { useGetProductsQuery } from "@/redux/api/product-api";
-import RelatedProducts from "./RelatedProducts";
+import Products from "@/components/products/Products";
 
 const MainDetail = () => {
   const { data, isLoading, isError } = useGetProductsQuery({ limit: 10000 });
@@ -8,7 +8,7 @@ const MainDetail = () => {
   return (
     <>
       <ProductDetail />
-      {!isLoading && !isError && data && <RelatedProducts data={data} />}
+      {!isLoading && !isError && data && <Products data={data} />}
     </>
   );
 };
