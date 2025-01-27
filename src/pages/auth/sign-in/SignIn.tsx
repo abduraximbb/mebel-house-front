@@ -4,15 +4,14 @@ import * as yup from "yup";
 import { ISignInCustomer } from "@/types";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import closeEye from "@/assets/images/close-eye.svg";
 import openEye from "@/assets/images/open-eye.svg";
 import { useSignInCustomerMutation } from "../../../redux/api/customer-api";
 import { saveToken } from "../../../redux/features/token-slice";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { saveEmail } from "@/redux/features/otp-slice";
 import { saveUser } from "@/redux/features/user-slice";
-import { RootState } from "@/redux";
 
 const schema = yup
   .object({

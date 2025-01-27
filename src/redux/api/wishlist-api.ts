@@ -1,4 +1,3 @@
-import { IGetProducts, IProduct, IProductQuery } from "@/types";
 import { mainApi } from "./index";
 
 const extendedApi = mainApi.injectEndpoints({
