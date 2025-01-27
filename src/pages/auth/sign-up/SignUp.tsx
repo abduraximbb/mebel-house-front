@@ -21,7 +21,7 @@ const schema = yup
     phone_number: yup.string().required("Phone number is required."),
     password: yup
       .string()
-      .min(6, "Password must be at least 6 characters long.")
+      .min(6, "Password must be at least 8 characters long.")
       .required("Password is required."),
     confirm_password: yup
       .string()
@@ -201,12 +201,12 @@ const SignUp = () => {
                 </span>
               </button>
               <Link to="/" className="text-right hover:underline mb-6 mr-1">
-                Back To
+                Back To{" "}
               </Link>
               <p className="text-sm text-black text-right">
                 Already have an account?{" "}
                 <Link
-                  to="/login"
+                  to="/auth/sign-in"
                   className="font-medium text-primary-600 hover:underline ease-in-out duration-200 dark:text-primary-500 text-sm"
                 >
                   Login here

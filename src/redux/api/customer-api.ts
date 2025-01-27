@@ -10,6 +10,13 @@ const extendedApi = mainApi.injectEndpoints({
         body,
       }),
     }),
+    signInCustomer: build.mutation<any, any>({
+      query: (body) => ({
+        url: "auth/client-signin",
+        method: "POST",
+        body,
+      }),
+    }),
     checkToken: build.query<any, any>({
       query: () => ({
         url: "auth/client-profile",
@@ -23,10 +30,7 @@ const extendedApi = mainApi.injectEndpoints({
         body,
       }),
     }),
-    verifyOtp: build.mutation<
-      any,
-      { email: string; verification_key: string; otp: string }
-    >({
+    verifyOtp: build.mutation<any,{ email: string; verification_key: string; otp: string }>({
       query: (body) => ({
         url: "auth/verifyotp",
         method: "POST",
@@ -41,4 +45,5 @@ export const {
   useCreateOtpMutation,
   useVerifyOtpMutation,
   useCheckTokenQuery,
+  useSignInCustomerMutation
 } = extendedApi;
