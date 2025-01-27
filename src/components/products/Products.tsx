@@ -1,10 +1,24 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import { Link } from "react-router-dom";
 import { IoCartOutline } from "react-icons/io5";
 import { IGetProducts, IProduct } from "@/types";
 import Heart from "./Heart";
 
 const Products = ({ data }: { data: IGetProducts }) => {
+  const [visibleProducts, setVisibleProducts] = useState<IProduct[]>(
+    data?.data?.slice(0, 4)
+  );
+  const showMoreProducts = () => {
+    const nextProducts = data?.data?.slice(
+      visibleProducts.length,
+      visibleProducts.length + 4
+    );
+    setVisibleProducts([...visibleProducts, ...nextProducts]);
+  };
+
+  const handleProductClick = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
@@ -22,6 +36,7 @@ const Products = ({ data }: { data: IGetProducts }) => {
           {/* View Product Button (top position) */}
           <Link
             to={`/product/${product.id}`}
+            onClick={handleProductClick}
             className="bg-slate-300 p-3 rounded-lg text-primary hover:bg-primary-light transition mb-3"
           >
             View Product
@@ -35,7 +50,7 @@ const Products = ({ data }: { data: IGetProducts }) => {
             <button className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition">
               Compare
             </button>
-            <Heart product={product}/>
+            <Heart product={product} />
           </div>
         </div>
       </div>
@@ -74,14 +89,16 @@ const Products = ({ data }: { data: IGetProducts }) => {
       </div>
 
       {/* See More Button */}
-      <div className="text-center mt-10">
-        <Link
-          to="/shop"
-          className="text-primary border-2 border-bg-primary bg-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-primary hover:text-bg-primary transition"
-        >
-          See More
-        </Link>
-      </div>
+      {visibleProducts.length < data?.data?.length && (
+        <div className="text-center mt-8">
+          <button
+            onClick={showMoreProducts}
+            className="px-8 py-3 bg-bg-primary text-white text-lg font-medium rounded-lg hover:bg-bg-primary transition"
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
