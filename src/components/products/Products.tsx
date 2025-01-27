@@ -1,14 +1,14 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { IGetProducts, IProduct } from "@/types";
+import Heart from "./Heart";
 
 const Products = ({ data }: { data: IGetProducts }) => {
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
-      className="relative group overflow-hidden rounded-xl shadow-xl bg-white transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+      className="relative group overflow-hidden rounded-xl shadow-xl bg-white transform transition-all duration-300"
     >
       {/* Product Image with hover effect */}
       <div className="relative w-full h-[350px] sm:h-[300px] md:h-[320px] lg:h-[350px] block">
@@ -35,9 +35,7 @@ const Products = ({ data }: { data: IGetProducts }) => {
             <button className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition">
               Compare
             </button>
-            <button className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition">
-                <IoMdHeartEmpty className="text-xl text-primary" />
-              </button>
+            <Heart product={product}/>
           </div>
         </div>
       </div>
@@ -77,13 +75,12 @@ const Products = ({ data }: { data: IGetProducts }) => {
 
       {/* See More Button */}
       <div className="text-center mt-10">
-       <Link
-        to="/shop"
-        className="text-primary border-2 border-bg-primary bg-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-primary hover:text-bg-primary transition"
-      >
-        See More
-      </Link>
-
+        <Link
+          to="/shop"
+          className="text-primary border-2 border-bg-primary bg-white px-8 py-4 text-lg font-semibold rounded-lg hover:bg-primary hover:text-bg-primary transition"
+        >
+          See More
+        </Link>
       </div>
     </div>
   );

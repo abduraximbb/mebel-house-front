@@ -14,9 +14,11 @@ import { clearOtp } from "@/redux/features/otp-slice";
 import OTP from "./OtpElement";
 
 export default function OTPInput() {
-  const { email } = useSelector(
+  const { email,verification_key } = useSelector(
     (state: RootState) => state.otp
   );
+ 
+  
   const dispatch = useDispatch();
 
   const [otp, setOtp] = React.useState("");
@@ -56,7 +58,7 @@ export default function OTPInput() {
       verifyOtp({
         email,
         otp,
-        verification_key: String(sessionStorage.getItem('verification_key')),
+        verification_key
       })
       .unwrap()
       .then((res) => {

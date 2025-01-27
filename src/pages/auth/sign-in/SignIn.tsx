@@ -4,12 +4,15 @@ import * as yup from "yup";
 import { ISignInCustomer } from "@/types";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import closeEye from "@/assets/images/close-eye.svg";
 import openEye from "@/assets/images/open-eye.svg";
 import { useSignInCustomerMutation } from "../../../redux/api/customer-api";
 import { saveToken } from "../../../redux/features/token-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { saveEmail } from "@/redux/features/otp-slice";
+import { saveUser } from "@/redux/features/user-slice";
+import { RootState } from "@/redux";
 
 const schema = yup
   .object({
@@ -30,6 +33,8 @@ const SignIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
 
+
+
   const {
     register,
     handleSubmit,
@@ -42,10 +47,24 @@ const SignIn = () => {
     login(data)
       .unwrap()
       .then((res) => {
-        // console.log("Login response:", res);
-        toast.success("Welcome back!", { position: "bottom-right" });
-        dispatch(saveToken(res.access_token));
-        navigate("/auth/profile"); // Redirect qilish
+        console.log("Login response:", res);
+        if (res.access_token) {
+          toast.success("Welcome back!", { position: "bottom-right" });
+          dispatch(saveToken(res.access_token));
+          dispatch(saveUser({email: data.email, id: res.id}))
+          // {clientId:40, wishlist: [9,8]}
+
+          // [6, 8] => [6, 8, 9]
+          navigate("/auth/profile"); // Redirect qilish
+        } else {
+          dispatch(
+            saveEmail({
+              email: data.email,
+              verification_key: res.verification_key,
+            })
+          );
+          navigate("/auth/otp"); // Redirect qilish
+        }
       })
       .catch((err) => {
         // console.error("Login error:", err);
@@ -96,6 +115,7 @@ const SignIn = () => {
                     {...register("password")}
                     type={showPassword ? "text" : "password"}
                     id="password"
+                    autoCapitalize="off"
                     placeholder="••••••••"
                     className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
                   />
@@ -141,3 +161,13 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
+// is_active = true
+
+// token
+
+// is_active = false
+
+// createOtp
+
+// verification_key
