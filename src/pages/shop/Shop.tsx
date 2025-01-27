@@ -12,6 +12,7 @@ import ShopInfo from "./ShopInfo";
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
   const { data, isLoading } = useGetProductsQuery({ limit: 16, page });
+  const [sortBy, setSortBy] = useState<string>("cheapest");
 
   const totalPages = data ? Math.ceil(data?.total / 16) : 0;
 
@@ -27,10 +28,25 @@ const Shop = () => {
     setPage(value);
   };
 
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const value = event.target.value;
+    if (value === "expensive") {
+      setSortBy("price=desc");
+    } else if (value === "cheapest") {
+      setSortBy("price=asc");
+    } else if (value === "newest") {
+      setSortBy("order=desc");
+    } else if (value === "oldest") {
+      setSortBy("order=asc");
+    }
+
+    console.log(value);
+  };
+
   return (
     <>
       <Hero />
-      <div className="bg-[#F9F1E7] dark:bg-[#645644] h-[100px] grid place-items-center font-poppins mb-16">
+      <div className="bg-[#faf3ea] dark:bg-[#645644] h-[100px] grid place-items-center font-poppins mb-16">
         <div className="container flex flex-wrap justify-between items-center gap-4">
           <div className="flex items-center gap-6 sm:gap-4">
             <div className="flex items-center gap-3 cursor-pointer hover:text-bg-primary duration-300">
@@ -68,10 +84,16 @@ const Shop = () => {
             </div>
             <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300">
               <p className="text-base md:text-sm">Sort by</p>
-              <input
-                placeholder="Default"
+              <select
+                value={sortBy}
+                onChange={handleSortChange}
                 className="w-48 h-14 md:w-32 md:h-12 bg-white dark:bg-slate-100 outline-none text-lg md:text-sm indent-3 rounded-sm text-bg-primary"
-              />
+              >
+                <option value="cheapest">Cheapest</option>
+                <option value="expensive">Most Expensive</option>
+                <option value="newest">Newest</option>
+                <option value="oldest">Oldest</option>
+              </select>
             </div>
           </div>
         </div>

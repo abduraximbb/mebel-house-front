@@ -111,7 +111,7 @@ const Products = ({
       </div>
 
       {/* See More Button */}
-      {showMore && visibleProducts.length < data?.data?.length && (
+      {showMore && visibleProducts?.length < data?.data?.length && (
         <div className="text-center mt-8">
           <button
             onClick={showMoreProducts}
