@@ -83,7 +83,7 @@ const Shop = () => {
           </div>
         )}
         {data ? (
-          <Products data={data} />
+          <Products data={data} showMore={false} title=""/>
         ) : (
           <>
             <div className="flex justify-center items-center">
