@@ -69,9 +69,22 @@ const Products = ({ data }: { data: IGetProducts }) => {
         >
           {product.description}
         </p>
-        <strong className="text-xl text-gray-900 mt-4 font-semibold">
-          {product.price.toLocaleString()} USD
-        </strong>
+        {product.discount > 0 ? (
+          <div className="flex justify-between items-center mt-4">
+            <strong className="text-xl text-gray-900 font-semibold ">
+              {(product.price - product.discount).toLocaleString()} USD
+            </strong>
+            <p className="text-[#B0B0B0] text-base">
+              USD <del>{product.price.toLocaleString()}</del>
+            </p>
+          </div>
+        ) : (
+          <div className=" mt-4">
+            <strong className="text-xl text-gray-900 font-semibold">
+              {product.price.toLocaleString()} USD
+            </strong>
+          </div>
+        )}
       </div>
     </div>
   ));
