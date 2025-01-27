@@ -4,10 +4,19 @@ import { IoCartOutline } from "react-icons/io5";
 import { IGetProducts, IProduct } from "@/types";
 import Heart from "./Heart";
 
-const Products = ({ data }: { data: IGetProducts }) => {
+const Products = ({
+  data,
+  showMore,
+  title
+}: {
+  data: IGetProducts;
+  showMore: boolean;
+  title:string
+}) => {
   const [visibleProducts, setVisibleProducts] = useState<IProduct[]>(
     data?.data?.slice(0, 4)
   );
+  
   const showMoreProducts = () => {
     const nextProducts = data?.data?.slice(
       visibleProducts.length,
@@ -93,7 +102,7 @@ const Products = ({ data }: { data: IGetProducts }) => {
     <div className="container my-12 px-4 max-[620px]:my-6 max-[620px]:px-2">
       {/* Section Title */}
       <h2 className="font-poppins-bold text-4xl mb-10 text-center text-gray-900">
-        Our Featured Products
+        {title}
       </h2>
 
       {/* Product Grid */}
@@ -102,7 +111,11 @@ const Products = ({ data }: { data: IGetProducts }) => {
       </div>
 
       {/* See More Button */}
+<<<<<<< HEAD
       {visibleProducts?.length < data?.data?.length && (
+=======
+      {showMore && visibleProducts.length < data?.data?.length && (
+>>>>>>> 37ea7388fade28a42594e717410461589c00e0cf
         <div className="text-center mt-8">
           <button
             onClick={showMoreProducts}
