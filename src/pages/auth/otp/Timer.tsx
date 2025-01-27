@@ -38,7 +38,7 @@ const Timer: FC<TimerProps> = ({ time = 60, className, callback, reload }) => {
         0{minutes}:{seconds < 10 ? `0${seconds}` : seconds}
       </div>
       :
-      <p className='text-gray-500'>Didn't recieve code? <span onClick={handleRequest} className='text-blue-500 cursor-pointer'>Request again</span></p>
+      <p className='text-gray-500'>Didn't recieve code? <span onClick={handleRequest} className='text-blue-500 cursor-pointer'> </span></p>
       }
 
     </div>
