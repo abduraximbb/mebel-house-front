@@ -8,17 +8,28 @@ import Hero from "./Hero";
 import { PiCirclesFourFill } from "react-icons/pi";
 import "./Shop.scss";
 import ShopInfo from "./ShopInfo";
+import { IProductQuery } from "../../types";
 
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
-  const { data, isLoading } = useGetProductsQuery({ limit: 16, page });
   const [sortBy, setSortBy] = useState<string>("cheapest");
+
+  // Create query object dynamically based on sortBy
+  const query: IProductQuery = {
+    limit: 16,
+    page,
+    ...(sortBy === "cheapest" || sortBy === "expensive"
+      ? { price: sortBy === "cheapest" ? "asc" : "desc" }
+      : { order: sortBy === "oldest" ? "asc" : "desc" }),
+  };
+
+  const { data, isLoading } = useGetProductsQuery(query);
 
   const totalPages = data ? Math.ceil(data?.total / 16) : 0;
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [page]);
+  }, [page, sortBy]);
 
   const handlePageChange = (
     event: React.ChangeEvent<unknown>,
@@ -30,17 +41,8 @@ const Shop = () => {
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
-    if (value === "expensive") {
-      setSortBy("price=desc");
-    } else if (value === "cheapest") {
-      setSortBy("price=asc");
-    } else if (value === "newest") {
-      setSortBy("order=desc");
-    } else if (value === "oldest") {
-      setSortBy("order=asc");
-    }
-
-    console.log(value);
+    setSortBy(value);
+    setPage(1); // Reset to the first page when sorting changes
   };
 
   return (
@@ -105,13 +107,11 @@ const Shop = () => {
           </div>
         )}
         {data ? (
-          <Products data={data} showMore={false} title=""/>
+          <Products data={data} showMore={false} title="" />
         ) : (
-          <>
-            <div className="flex justify-center items-center">
-              <h2 className="text-4xl font-medium">No products found.</h2>
-            </div>
-          </>
+          <div className="flex justify-center items-center">
+            <h2 className="text-4xl font-medium">No products found.</h2>
+          </div>
         )}
         <div className="flex justify-center">
           <Pagination
