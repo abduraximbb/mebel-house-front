@@ -14,8 +14,7 @@ const Wishlist = () => {
     
   return (
     <div>
-        <p>Wishlist</p>
-        <Products data={token ? data : {data: wishlist}}/>
+        <Products data={token ? data : {data: wishlist}} showMore={true} title="Your Wishlist"/>
     </div>
   )
 }
