@@ -102,7 +102,7 @@ const Products = ({ data }: { data: IGetProducts }) => {
       </div>
 
       {/* See More Button */}
-      {visibleProducts.length < data?.data?.length && (
+      {visibleProducts?.length < data?.data?.length && (
         <div className="text-center mt-8">
           <button
             onClick={showMoreProducts}
