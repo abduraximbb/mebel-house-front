@@ -6,7 +6,7 @@ const Auth = () => {
   
   const token = useSelector((state: RootState) => state.token.access_token)
   // console.log(token);
-  return token ? <Outlet/> : <Navigate replace to={"/auth/sign-up"}/>
+  return token ? <Outlet/> : <Navigate replace to={"/auth/sign-in"}/>
 }
 
 export default Auth

@@ -11,7 +11,7 @@ const initialState: TokenState = {
 };
 
 export const tokenSlice = createSlice({
-  name: "otp",
+  name: "token",
   initialState,
   reducers: {
     saveToken: (state, action: PayloadAction<string>) => {

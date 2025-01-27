@@ -6,6 +6,7 @@ import MainDetail from "@/pages/detail/MainDetail";
 import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import SignIn from "../pages/auth/sign-in/SignIn";
+import Wishlist from "@/pages/wishlist/Wishlist";
 const Home = lazy(() => import("@/pages/home/Home"));
 const Shop = lazy(() => import("@/pages/shop/Shop"));
 const Layout = lazy(() => import("@/pages/layout/Layout"));
@@ -37,6 +38,14 @@ const Routers = () => {
               element: (
                 <SuspenseContainer>
                   <Shop />
+                </SuspenseContainer>
+              ),
+            },
+            {
+              path: "/wishlist",
+              element: (
+                <SuspenseContainer>
+                  <Wishlist />
                 </SuspenseContainer>
               ),
             },

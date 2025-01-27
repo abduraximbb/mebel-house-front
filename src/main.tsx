@@ -1,7 +1,7 @@
 import App from './App.tsx'
 import './sass/index.scss'
 import { BrowserRouter } from 'react-router-dom'
-import { store } from './redux'
+import { store } from './redux/index.ts'
 import { Provider } from 'react-redux'
 import { createRoot } from 'react-dom/client'
 
