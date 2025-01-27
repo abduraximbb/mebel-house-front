@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const EmptyWishlist = () => {
   const navigate = useNavigate();
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-gray-100 p-4 text-center">
+    <div className="flex flex-col items-center justify-center p-4 text-center h-[450px]">
       <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-bg-primary mb-4">
         Your Wishlist is Empty
       </h1>
