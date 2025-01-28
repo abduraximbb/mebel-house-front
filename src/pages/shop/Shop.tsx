@@ -194,7 +194,7 @@ const Shop = () => {
           </div>
 
           {/* Category Filter */}
-          <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300 mt-4">
+          <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Category</p>
             <select
               value={category}
@@ -211,7 +211,7 @@ const Shop = () => {
           </div>
 
           {/* Sorting Filter */}
-          <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300 mt-4">
+          <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Sort by</p>
             <select
               value={sortBy}
