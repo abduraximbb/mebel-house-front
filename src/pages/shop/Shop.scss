@@ -49,3 +49,97 @@
     height: 80px;
   }
 }
+
+/* Filter va ko'rinishni sozlash tugmalari */
+.filter-container {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+
+  .filter-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 1.125rem; // text-xl
+    font-weight: 500;
+
+    &:hover {
+      color: #f89406; // bg-primary rangga o'xshash
+      transition: color 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 1rem; // text-base
+    }
+  }
+
+  .icon-button {
+    width: 32px;
+    height: 32px;
+
+    @media (max-width: 768px) {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  .divider {
+    display: inline-block;
+    height: 20px;
+    width: 1px;
+    background-color: #ccc;
+    margin: 0 8px;
+
+    @media (max-width: 768px) {
+      height: 16px;
+    }
+  }
+
+  .results-info {
+    font-size: 0.875rem; // text-sm
+    color: #555;
+
+    @media (max-width: 768px) {
+      font-size: 0.75rem; // text-xs
+    }
+  }
+}
+
+/* Sort by tanlash uslubi */
+.sort-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .sort-text {
+    font-size: 1rem; // text-base
+    cursor: pointer;
+
+    @media (max-width: 768px) {
+      font-size: 0.875rem; // text-sm
+    }
+  }
+
+  select {
+    width: 200px;
+    height: 56px;
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding-left: 12px;
+    font-size: 1rem;
+    color: #333;
+    outline: none;
+
+    &:focus {
+      border-color: #f89406; // Primary rang
+    }
+
+    @media (max-width: 768px) {
+      width: 150px;
+      height: 44px;
+      font-size: 0.875rem; // text-sm
+    }
+  }
+}
