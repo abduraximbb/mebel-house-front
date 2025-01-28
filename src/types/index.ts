@@ -43,6 +43,10 @@ export interface ISignInCustomer {
   password: string;
 }
 
+export interface IGetCategories {
+  data: ICategory[];
+}
+
 export interface ICategory {
   id: number;
   name: string;
