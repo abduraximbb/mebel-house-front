@@ -7,14 +7,14 @@ import Heart from "./Heart";
 const Products = ({
   data,
   seeMoreBtn,
-  title
+  title,
+  countProducts,
 }: {
   data: IGetProducts;
   seeMoreBtn: boolean;
-  title:string
+  title: string;
+  countProducts: number;
 }) => {
-  console.log("seeMoreBtn", seeMoreBtn);
-  
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
@@ -60,9 +60,22 @@ const Products = ({
         >
           {product.description}
         </p>
-        <strong className="text-lg text-gray-900 mt-3 font-semibold">
-          {product.price.toLocaleString()} USD
-        </strong>
+        <div className="flex mt-3 items-center justify-between">
+          {product.discount > 0 ? (
+            <>
+              <strong className="text-xl text-[#3A3A3A] font-poppins">
+                {product.price - (product.price * product.discount) / 100} USD
+              </strong>
+              <p className="text-base text-[#B0B0B0] font-poppins">
+                <del>{product.price.toLocaleString()} USD</del>
+              </p>
+            </>
+          ) : (
+            <strong className="text-xl text-[#3A3A3A] font-poppins">
+              {product.price.toLocaleString()} USD
+            </strong>
+          )}
+        </div>
       </div>
     </div>
   ));
@@ -74,7 +87,7 @@ const Products = ({
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-4 md:gap-4">
-        {productItems.slice(0, 8).map((item, index) => (
+        {productItems.slice(0, countProducts).map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
