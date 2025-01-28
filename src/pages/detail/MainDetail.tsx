@@ -8,7 +8,7 @@ const MainDetail = () => {
   return (
     <>
       <ProductDetail />
-      {!isLoading && !isError && data && <Products data={data} showMore={true} title="Related Products"/>}
+      {!isLoading && !isError && data && <Products data={data}/>}
     </>
   );
 };
