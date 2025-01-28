@@ -18,7 +18,7 @@ const Home = () => {
         <>
           <Hero />
           <Browse />
-          {data && <Products data={data} seeMoreBtn={true} title="Our Products" count={8}/>}
+          {data && <Products data={data} seeMoreBtn={true} title="Our Products" countProducts={8}/>}
           <SlickRoomSlider />
           <SwiperInfinite />
         </>
