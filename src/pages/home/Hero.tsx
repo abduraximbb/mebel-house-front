@@ -1,23 +1,19 @@
+import { Link } from "react-router-dom";
+
 const Hero = () => {
   return (
-    <div className="bg-hero-image bg-cover bg-center  font-poppins">
-      <div className="flex items-center container justify-end h-[716px]">
-        <div className="text-start bg-white bg-opacity-70 p-8 rounded-lg max-w-lg max-[640px]:max-w-xs sm:max-w-xs md:max-w-sm lg:max-w-xl">
-          <h4 className="text-sm text-gray-500 uppercase mb-4">New Arrival</h4>
-          <h1 className="text-2xl max-[640px]:text-3xl sm:text-3xl md:text-4xl lg:text-5xl lg:w-[560px] lg:h-[100px] leading-[65px] font-bold text-bg-primary mb-6">
-            Discover Our New Collection
-          </h1>
-          <p className="text-gray-600 mb-6 text-sm sm:text-base md:text-lg lg:text-xl">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
-            tellus, luctus nec ullamcorper mattis.
-          </p>
-          <button className="w-[210px] h-[60px] bg-bg-primary text-white px-6 py-3 font-bold  hover:bg-yellow-700 duration-300">
-            BUY NOW
-          </button>
+       <section className='bg-hero-image w-full bg-fixed bg-center bg-no-repeat bg-cover md:bg-top font-Poppins' style={{height: "100svh"}}>
+      <div className="h-screen w-full flex lg:justify-end items-center lg:px-[58px] justify-center px-3">
+        <div className=" bg-[#FFF3E3] border-r-8 shadow-sm pt-[62px] h-fit pb-[37px] lg:px-9 px-6 min-w-min">
+          <span className="font-medium tracking-[3px]">New Arrival</span>
+          <h1 className="pt-1 lg:mb-4 lg:mt-0 text-[#B88E2F] my-5 font-bold lg:text-[52px] lg:leading-[65px] left-16 lg:w-[430px] text-3xl">Discover Our New Collection</h1>
+          <p className="text-[#333333] lg:text-[18px] font-medium lg:mb-12 mb-5 leading-6 lg:w-[480px] sm:text-sm text-base">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.</p>
+          <Link to="/shop" className="bg-[#B88E2F] text-center uppercase font-bold lg:w-[222px] w-full py-[25px] lg:mx-0 mx-auto block cursor-pointer text-white border-0 outline-0">buy now</Link>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
 export default Hero;
+
