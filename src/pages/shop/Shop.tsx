@@ -13,10 +13,11 @@ import { IProductQuery } from "../../types";
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("cheapest");
+  const limitNum = 16
 
   // Create query object dynamically based on sortBy
   const query: IProductQuery = {
-    limit: 16,
+    limit: limitNum,
     page,
     ...(sortBy === "cheapest" || sortBy === "expensive"
       ? { price: sortBy === "cheapest" ? "asc" : "desc" }
@@ -25,7 +26,7 @@ const Shop = () => {
 
   const { data, isLoading } = useGetProductsQuery(query);
 
-  const totalPages = data ? Math.ceil(data?.total / 16) : 0;
+  const totalPages = data ? Math.ceil(data?.total / limitNum) : 0;
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -67,23 +68,15 @@ const Shop = () => {
                 ? "Pending results..."
                 : data && data.total > 0
                 ? `Showing ${Math.min(
-                    (page - 1) * 16 + 1,
+                    (page - 1) * limitNum + 1,
                     data.total
-                  )}–${Math.min(page * 16, data.total)} of ${
+                  )}–${Math.min(page * limitNum, data.total)} of ${
                     data.total
                   } results`
                 : "No results found"}
             </div>
           </div>
           <div className="flex flex-wrap gap-4 md:gap-2 items-center">
-            <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300">
-              <p className="text-base md:text-sm">Show</p>
-              <input
-                placeholder="16"
-                maxLength={3}
-                className="w-14 h-14 md:w-12 md:h-12 bg-white dark:bg-slate-100 outline-none text-lg md:text-sm text-center rounded-sm text-bg-primary"
-              />
-            </div>
             <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300">
               <p className="text-base md:text-sm">Sort by</p>
               <select
