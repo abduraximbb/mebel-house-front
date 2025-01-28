@@ -1,4 +1,4 @@
-import { ICategory } from "@/types";
+import { ICategory, IGetCategories } from "@/types";
 import { mainApi } from "./index";
 
 const extendedApi = mainApi.injectEndpoints({
@@ -9,7 +9,14 @@ const extendedApi = mainApi.injectEndpoints({
         method: "GET",
       }),
     }),
+    getCategories: build.query<IGetCategories, any>({
+      query: (params) => ({
+        url: "category",
+        method: "GET",
+        params,
+      }),
+    }),
   }),
 });
 
-export const { useGetCategoryByIdQuery } = extendedApi;
+export const { useGetCategoryByIdQuery, useGetCategoriesQuery } = extendedApi;
