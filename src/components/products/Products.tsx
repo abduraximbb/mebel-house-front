@@ -4,7 +4,17 @@ import { IoCartOutline } from "react-icons/io5";
 import { IGetProducts, IProduct } from "@/types";
 import Heart from "./Heart";
 
-const Products = ({ data }: { data: IGetProducts }) => {
+const Products = ({
+  data,
+  seeMoreBtn,
+  title
+}: {
+  data: IGetProducts;
+  seeMoreBtn: boolean;
+  title:string
+}) => {
+  console.log("seeMoreBtn", seeMoreBtn);
+  
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
@@ -60,25 +70,24 @@ const Products = ({ data }: { data: IGetProducts }) => {
   return (
     <div className="container my-12 px-4 max-[620px]:my-6 max-[620px]:px-2">
       <h2 className="font-poppins-bold text-3xl mb-8 text-center text-gray-900">
-        Our Featured Products
+        {title}
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-4 md:gap-4">
         {productItems.slice(0, 8).map((item, index) => (
-          <div key={index}>
-            {item}
-          </div>
+          <div key={index}>{item}</div>
         ))}
       </div>
-
-      <div className="text-center mt-10">
-        <Link
-          to="/shop"
-          className="text-primary border-2 border-bg-primary bg-white px-8 py-4 text-lg font-semibold hover:bg-primary hover:text-bg-primary transition"
-        >
-          See More
-        </Link>
-      </div>
+      {seeMoreBtn && (
+        <div className="text-center mt-10">
+          <Link
+            to="/shop"
+            className="text-primary border-2 border-bg-primary bg-white px-8 py-4 text-lg font-semibold hover:bg-primary hover:text-bg-primary transition"
+          >
+            See More
+          </Link>
+        </div>
+      )}
     </div>
   );
 };
