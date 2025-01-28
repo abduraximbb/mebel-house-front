@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { IoMdHeartEmpty } from "react-icons/io";
 import { IoCartOutline } from "react-icons/io5";
 import { IGetProducts, IProduct } from "@/types";
+import Heart from "./Heart";
 
 const Products = ({ data }: { data: IGetProducts }) => {
   const productItems = data?.data?.map((product: IProduct) => (
@@ -32,9 +32,7 @@ const Products = ({ data }: { data: IGetProducts }) => {
             <button className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
               Compare
             </button>
-            <button className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
-              <IoMdHeartEmpty className="text-lg text-primary" />
-            </button>
+            <Heart product={product} />
           </div>
         </div>
       </div>
