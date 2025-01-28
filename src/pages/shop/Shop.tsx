@@ -107,7 +107,7 @@ const Shop = () => {
           </div>
         )}
         {data ? (
-          <Products data={data}/>
+          <Products data={data} seeMoreBtn={false} title=""/>
         ) : (
           <div className="flex justify-center items-center">
             <h2 className="text-4xl font-medium">No products found.</h2>
