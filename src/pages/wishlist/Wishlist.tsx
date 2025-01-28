@@ -17,8 +17,6 @@ const Wishlist = () => {
       {wishlist?.length ? ( // wishlist mavjud bo'lsa
         <Products
           data={token ? data : { data: wishlist }} // Agar token bo'lsa, API ma'lumotlari, aks holda lokal wishlist
-          showMore={true} // Show More tugmasi faollashtirilgan
-          title="Your Wishlist" // "Your Wishlist" sarlavhasi
         />
       ) : (
         <EmptyWishlist /> // Wishlist mavjud bo'lmasa, EmptyWishlist ko'rsatiladi
