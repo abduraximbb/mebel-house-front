@@ -87,6 +87,7 @@ const Products = ({
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-4 md:gap-4">
+
         {productItems.slice(0, countProducts).map((item, index) => (
           <div key={index}>{item}</div>
         ))}

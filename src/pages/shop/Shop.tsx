@@ -234,7 +234,6 @@ const Shop = () => {
         )}
         {data ? (
           <Products data={data} seeMoreBtn={false} title="" countProducts={16}/>
-
         ) : (
           <div className="flex justify-center items-center">
             <h2 className="text-4xl font-medium">No products found.</h2>
