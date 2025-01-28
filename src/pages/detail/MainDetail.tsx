@@ -8,9 +8,9 @@ const MainDetail = () => {
 
   return (
     <>
-      <ProductDetail /> 
-      {!isLoading && !isError && data && <Products data={data}/>}
-    
+
+      <ProductDetail />
+      {!isLoading && !isError && data && <Products data={data} seeMoreBtn={true} title=""/>}
     </>
   );
 };
