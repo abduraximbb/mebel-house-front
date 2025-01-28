@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div
-      className={`bg-white w-full shadow-sm sticky  left-0 z-50 ${
+      className={`bg-white  w-full shadow-sm sticky  left-0 z-50 ${
         !online && firstEnter ? "top-6" : "top-0"
       } ${online && firstEnter ? "header-animete" : ""}`}
     >
@@ -45,7 +45,7 @@ const Header = () => {
           ))}
         </div>
         <div className="flex items-center gap-6 max-[520px]:hidden">
-          <NavLink to={token ? "/auth/profile" : "/auth/sign-in"}>
+          <NavLink to={token ? "/auth/profile" : "/auth/sign-up"}>
             <LuUser className="h-6 w-6 hover:text-bg-primary duration-300" />
           </NavLink>
           <FiSearch
