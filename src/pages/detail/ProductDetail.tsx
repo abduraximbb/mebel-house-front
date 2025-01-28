@@ -224,77 +224,79 @@ const ProductDetail = () => {
               </div>
             </div>
           </div>
-
-          <div className="mt-10">
-            <div className="flex space-x-10 border-b border-gray-300 pb-2">
-              <button
-                className={`text-lg font-semibold ${
-                  activeTab === "description"
-                    ? "border-b-2 border-black"
-                    : "text-gray-500"
-                }`}
-                onClick={() => setActiveTab("description")}
-              >
-                Description
-              </button>
-              <button
-                className={`text-lg font-semibold ${
-                  activeTab === "reviews"
-                    ? "border-b-2 border-black"
-                    : "text-gray-500"
-                }`}
-                onClick={() => setActiveTab("reviews")}
-              >
-                Reviews
-              </button>
-              <button
-                className={`text-lg font-semibold ${
-                  activeTab === "additionalInfo"
-                    ? "border-b-2 border-black"
-                    : "text-gray-500"
-                }`}
-                onClick={() => setActiveTab("additionalInfo")}
-              >
-                Additional Information
-              </button>
-            </div>
-
-            {activeTab === "description" && (
-              <div className="mt-4 text-gray-600">
-                <p>{product.description}</p>
-              </div>
-            )}
-
-            {activeTab === "reviews" && (
-              <div className="mt-4 text-gray-600">
-                <p>
-                  <strong>Reviews:</strong> No reviews yet. Be the first to
-                  review this product!
-                </p>
-              </div>
-            )}
-
-            {activeTab === "additionalInfo" && (
-              <div className="mt-4 text-gray-600">
-                <p>
-                  <strong>Name:</strong> {product.name}
-                </p>
-                <p>
-                  <strong>Colors:</strong> {product.colors.join(", ")}
-                </p>
-                <p>
-                  <strong>Price:</strong> {product.price.toLocaleString()} USD
-                </p>
-                <p>Rating: {product.avg_rating}</p>
-                <p>Tags: {product.tags.join(", ")}</p>
-                <p>Stock: {product.stock}</p>
-              </div>
-            )}
-          </div>
         </div>
       </div>
 
-      <div className="mt-12 grid grid-cols-2 gap-4">
+
+      {/* Tabs Section (moved to the bottom) */}
+      <div className="mt-12">
+        <div className="flex justify-center space-x-10 border-b border-gray-300 pb-2">
+          <button
+            className={`text-lg font-semibold ${
+              activeTab === "description"
+                ? "border-b-2 border-black"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("description")}
+          >
+            Description
+          </button>
+          <button
+            className={`text-lg font-semibold ${
+              activeTab === "reviews"
+                ? "border-b-2 border-black"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("reviews")}
+          >
+            Reviews
+          </button>
+          <button
+            className={`text-lg font-semibold ${
+              activeTab === "additionalInfo"
+                ? "border-b-2 border-black"
+                : "text-gray-500"
+            }`}
+            onClick={() => setActiveTab("additionalInfo")}
+          >
+            Additional Information
+          </button>
+        </div>
+
+        {activeTab === "description" && (
+          <div className="mt-4 text-gray-600">
+            <p>{product.description}</p>
+          </div>
+        )}
+
+        {activeTab === "reviews" && (
+          <div className="mt-4 text-gray-600">
+            <p>
+              <strong>Reviews:</strong> No reviews yet. Be the first to review
+              this product!
+            </p>
+          </div>
+        )}
+
+        {activeTab === "additionalInfo" && (
+          <div className="mt-4 text-gray-600">
+            <p>
+              <strong>Name:</strong> {product.name}
+            </p>
+            <p>
+              <strong>Colors:</strong> {product.colors.join(", ")}
+            </p>
+            <p>
+              <strong>Price:</strong> {product.price.toLocaleString()} USD
+            </p>
+            <p>Rating: {product.avg_rating}</p>
+            <p>Tags: {product.tags.join(", ")}</p>
+            <p>Stock: {product.stock}</p>
+          </div>
+        )}
+      </div>
+
+     <div className="mt-12 grid grid-cols-2 gap-4">
         {product.images.slice(0, 2).map((img, index) => (
           <img
             key={index}
@@ -304,6 +306,9 @@ const ProductDetail = () => {
           />
         ))}
       </div>
+
+
+
     </motion.div>
   );
 };
