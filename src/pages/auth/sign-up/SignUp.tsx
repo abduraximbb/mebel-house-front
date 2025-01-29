@@ -35,7 +35,7 @@ const SignUp = () => {
   const dispatch = useDispatch();
   const [createCustomer] = useCreateCustomerMutation();
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false); 
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const {
     register,
@@ -69,16 +69,16 @@ const SignUp = () => {
   return (
     <section className="bg-primary-hero-image w-full h-screen bg-cover bg-fixed bg-center bg-no-repeat md:bg-top">
       <div className="bg-[#3A3A3A]/75 w-full h-full">
-        <div className="h-full lg:w-[60%] md:w-8/12 sm:w-10/12 flex flex-col justify-center items-center mx-auto px-4">
+        <div className="h-full flex justify-center items-center px-4">
           <form
-            className="flex xl:justify-between xl:flex-row flex-col sm:gap-10 min-h-[60%] w-full xl:mt-0 mt-5 p-6 bg-slate-50 rounded-lg"
+            className="flex flex-col lg:flex-row gap-10 max-w-4xl w-full bg-slate-50 rounded-lg p-6 shadow-xl"
             onSubmit={handleSubmit(onSubmit)}
           >
-            <div className="xl:w-6/12 flex flex-col gap-3">
+            <div className="flex flex-col gap-4 w-full lg:w-1/2">
               <div>
                 <label
                   htmlFor="full_name"
-                  className="block mb-2 sm:text-lg font-medium text-black capitalize"
+                  className="block text-sm font-medium text-black"
                 >
                   Full Name
                 </label>
@@ -86,18 +86,16 @@ const SignUp = () => {
                   {...register("full_name")}
                   id="full_name"
                   placeholder="Full Name"
-                  className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-primary-300"
                 />
                 {errors.full_name && (
-                  <div className="text-red-600 font-medium text-sm text-right">
-                    {errors.full_name.message}
-                  </div>
+                  <p className="text-red-600 text-xs">{errors.full_name.message}</p>
                 )}
               </div>
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 sm:text-lg font-medium text-black capitalize"
+                  className="block text-sm font-medium text-black"
                 >
                   Email
                 </label>
@@ -105,18 +103,16 @@ const SignUp = () => {
                   {...register("email")}
                   id="email"
                   placeholder="Email"
-                  className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-primary-300"
                 />
                 {errors.email && (
-                  <div className="text-red-600 font-medium text-sm text-right">
-                    {errors.email.message}
-                  </div>
+                  <p className="text-red-600 text-xs">{errors.email.message}</p>
                 )}
               </div>
               <div>
                 <label
                   htmlFor="phone_number"
-                  className="block mb-2 sm:text-lg font-medium text-black capitalize"
+                  className="block text-sm font-medium text-black"
                 >
                   Phone Number
                 </label>
@@ -124,20 +120,19 @@ const SignUp = () => {
                   {...register("phone_number")}
                   id="phone_number"
                   placeholder="+998 ** *** ** **"
-                  className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
+                  className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-primary-300"
                 />
                 {errors.phone_number && (
-                  <div className="text-red-600 font-medium text-sm text-right">
-                    {errors.phone_number.message}
-                  </div>
+                  <p className="text-red-600 text-xs">{errors.phone_number.message}</p>
                 )}
               </div>
             </div>
-            <div className="xl:w-6/12 flex flex-col gap-3">
+
+            <div className="flex flex-col gap-4 w-full lg:w-1/2">
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 sm:text-lg font-medium text-black capitalize"
+                  className="block text-sm font-medium text-black"
                 >
                   Password
                 </label>
@@ -147,25 +142,23 @@ const SignUp = () => {
                     type={showPassword ? "text" : "password"}
                     id="password"
                     placeholder="••••••••"
-                    className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-primary-300"
                   />
                   <img
                     src={showPassword ? openEye : closeEye}
-                    className="absolute w-6 h-6 cursor-pointer right-2.5 top-5"
+                    className="absolute w-6 h-6 cursor-pointer right-2 top-3"
                     onClick={() => setShowPassword(!showPassword)}
                     alt="Toggle password visibility"
                   />
                 </div>
                 {errors.password && (
-                  <div className="text-red-600 font-medium text-sm text-right">
-                    {errors.password.message}
-                  </div>
+                  <p className="text-red-600 text-xs">{errors.password.message}</p>
                 )}
               </div>
               <div>
                 <label
                   htmlFor="confirm_password"
-                  className="block mb-2 sm:text-lg font-medium text-black capitalize"
+                  className="block text-sm font-medium text-black"
                 >
                   Confirm Password
                 </label>
@@ -175,11 +168,11 @@ const SignUp = () => {
                     type={showConfirmPassword ? "text" : "password"}
                     id="confirm_password"
                     placeholder="••••••••"
-                    className="p-4 rounded-md focus:outline w-full focus:outline-gray-500 border"
+                    className="w-full p-3 border rounded-md focus:outline-none focus:ring focus:ring-primary-300"
                   />
                   <img
                     src={showConfirmPassword ? openEye : closeEye}
-                    className="absolute w-6 h-6 cursor-pointer right-2.5 top-5"
+                    className="absolute w-6 h-6 cursor-pointer right-2 top-3"
                     onClick={() =>
                       setShowConfirmPassword(!showConfirmPassword)
                     }
@@ -187,30 +180,34 @@ const SignUp = () => {
                   />
                 </div>
                 {errors.confirm_password && (
-                  <div className="text-red-600 font-medium text-sm text-right">
+                  <p className="text-red-600 text-xs">
                     {errors.confirm_password.message}
-                  </div>
+                  </p>
                 )}
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg sm:text-lg text-center bg-yellow-700 border dark:hover:bg-primary-700 dark:focus:ring-primary-800 text-sm mb-3"
+                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg sm:text-lg text-center bg-yellow-700 border dark:hover:bg-primary-700 dark:focus:ring-primary-800 text-sm mb-3 mt-4"
               >
                 <span className="block px-5 py-2.5 w-full h-full hover:translate-x-1 duration-200 ease-in-out">
                   Sign Up
                 </span>
               </button>
-              <Link to="/" className="text-right hover:underline mb-6 mr-1">
-                Back To{" "}
-              </Link>
-              <p className="text-sm text-black text-right">
+              <p className="text-sm text-black text-left mt-3">
                 Already have an account?{" "}
                 <Link
                   to="/auth/sign-in"
-                  className="font-medium text-primary-600 hover:underline ease-in-out duration-200 dark:text-primary-500 text-sm"
+                  className="font-medium text-primary-600 hover:underline mr-8"
                 >
                   Login here
                 </Link>
+                <span>
+                  <Link to="/" className="text-right hover:underline mb-6 mr-1">
+                Back To Home{" "}
+              </Link>
+                </span>
+              
+              
               </p>
             </div>
           </form>

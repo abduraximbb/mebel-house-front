@@ -15,23 +15,8 @@ import { useGetCategoriesQuery } from "../../redux/api/category-api";
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("cheapest");
-  const [category, setCategory] = useState<string>("");
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [isFilterApplied, setIsFilterApplied] = useState(false); 
-  const { data: fetchedCategories } = useGetCategoriesQuery({});
-  const minPrice = useRef<number | undefined>();
-  const maxPrice = useRef<number | undefined>();
-  const limitNum = 16;
 
-  const categories = fetchedCategories?.data.map((category: any) => ({
-    id: category.id,
-    name: category.name,
-  })) || [
-    { id: "1", name: "Category 1" },
-    { id: "2", name: "Category 2" },
-  ];
-
-
+  // Create query object dynamically based on sortBy
   const query: IProductQuery = {
     limit: limitNum,
     page,
@@ -58,58 +43,16 @@ const Shop = () => {
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortBy(event.target.value);
-    setPage(1); 
-  };
-
-  const toggleFilter = () => {
-    setIsFilterOpen((prev) => !prev);
-  };
-
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setCategory(event.target.value); 
-  };
-  
-  const handlePriceChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    type: "min" | "max"
-  ) => {
-    const value = event.target.value ? parseInt(event.target.value, 10) : undefined;
-  console.log(event.target.value);
-
-    if (type === "min") {
-      if (value !== undefined) {
-        if (value < 0) {
-          toast.error("Min price cannot be less than 0!");
-          return;
-        }
-        if (maxPrice.current !== undefined && value > maxPrice.current) {
-          toast.error("Min price cannot be greater than max price!");
-          return;
-        }
-      }
-      minPrice.current = value;
-    } else {
-      if (value !== undefined) {
-        if (minPrice.current !== undefined && value < minPrice.current) {
-          toast.error("Max price cannot be less than min price!");
-          return;
-        }
-      }
-      maxPrice.current = value;
-    }
-  };
-
-  const applyFilter = () => {
-    setIsFilterApplied(!isFilterApplied); 
-    setPage(1);
+    const value = event.target.value;
+    setSortBy(value);
+    setPage(1); // Reset to the first page when sorting changes
   };
 
   return (
     <>
       <Hero />
-      <div className="bg-[#faf3ea] dark:bg-[#645644] h-[100px] grid place-items-center font-poppins mb-16">
-        <div className="container flex flex-wrap justify-between items-center gap-4">
+      <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
+        <div className="container flex flex-wrap justify-between items-center gap-4 sm:gap-2">
           <div className="flex items-center gap-6 sm:gap-4">
             <div
               className="flex items-center gap-3 cursor-pointer hover:text-bg-primary duration-300"
