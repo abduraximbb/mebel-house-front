@@ -10,7 +10,7 @@ const extendedApi = mainApi.injectEndpoints({
       }),
       invalidatesTags: ["WISHLIST"]
     }),
-    getWishlist: build.query<any, string>({
+    getWishlist: build.query<any,number>({
       query: (id) => ({
         url: `wishlist/client/${id}`,
         method: "GET",
