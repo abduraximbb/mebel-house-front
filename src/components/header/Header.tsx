@@ -30,16 +30,16 @@ const Header: FC = () => {
   });
 
   const wishlist = useSelector((state: RootState) => state.wishlist.value);
-  const { data: wishlistData } = useGetWishlistQuery(
-    Number(data?.clientId?.id),
-    { skip: Boolean(!data) }
-  );
+  const { data: wishlistData } = useGetWishlistQuery(Number(data?.client?.id), {
+    skip: Boolean(!data),
+  });
 
   const totalWishlist = wishlistData
-    ? wishlistData?.data?.product?.length
+    ? wishlistData?.data?.length
     : wishlist?.length
     ? wishlist?.length
     : 0;
+  console.log(totalWishlist);
 
   const navigate = useNavigate();
   return (
@@ -99,7 +99,7 @@ const Header: FC = () => {
           <NavLink to={token ? "/auth/profile" : "/auth/sign-in"}>
             {isSuccess ? (
               <div className="w-8 h-8 bg-bg-primary max-[986px]:hidden rounded-full flex items-center justify-center text-white uppercase">
-                {data?.customer?.first_name?.trim()?.slice(0, 1)}
+                {data?.client?.full_name?.trim()?.slice(0, 1)}
               </div>
             ) : (
               <LuUser className="h-6 w-6 hover:text-bg-primary duration-200 max-[986px]:hidden" />

@@ -20,7 +20,8 @@ export interface IProduct {
   colors: string[];
   tags: string[];
   discount: number;
-  categoryId: number;
+  categoryId?: number;
+  isLike?: boolean;
 }
 export interface IProductQuery {
   filter?: string;
