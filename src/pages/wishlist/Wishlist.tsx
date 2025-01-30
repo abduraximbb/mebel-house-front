@@ -31,7 +31,7 @@ const Wishlist = () => {
         countProducts={Infinity}
         title={
           data?.data?.length > 0 || wishlist?.length > 0 ? (
-            "Yours like products"
+            "Wishlist"
           ) : (
             <EmptyWishlist />
           )
