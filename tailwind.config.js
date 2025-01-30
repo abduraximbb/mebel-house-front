@@ -13,7 +13,8 @@ export default {
       },
       backgroundImage: {
         "hero-image": 'url("/assets/hero_home.png")',
-        "shop-image": 'url("/assets/hero_home.png")'
+        "shop-image": 'url("/assets/hero_home.png")',
+        "backgorund-image": 'url("/assets/backgound.png")',
       },
     },
     container: {
