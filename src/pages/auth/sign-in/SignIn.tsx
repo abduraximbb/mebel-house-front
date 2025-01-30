@@ -9,9 +9,11 @@ import closeEye from "@/assets/images/close-eye.svg";
 import openEye from "@/assets/images/open-eye.svg";
 import { useSignInCustomerMutation } from "../../../redux/api/customer-api";
 import { saveToken } from "../../../redux/features/token-slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { saveEmail } from "@/redux/features/otp-slice";
-import { saveUser } from "@/redux/features/user-slice";
+import { RootState } from "../../../redux";
+import { useSetWishlistMutation } from "../../../redux/api/wishlist-api";
+import { clearWishlist } from "../../../redux/features/wishlist-slice";
 
 const schema = yup
   .object({
@@ -31,7 +33,8 @@ const SignIn = () => {
   const [login] = useSignInCustomerMutation(); // Updated mutation hook for login
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
-
+  const wishlist = useSelector((state: RootState) => state.wishlist.value);
+  const [setWishlist] = useSetWishlistMutation();
 
 
   const {
@@ -46,13 +49,21 @@ const SignIn = () => {
     login(data)
       .unwrap()
       .then((res) => {
-        console.log("Login response:", res);
-        if (res.access_token) {
+        if (res?.access_token) {
           toast.success("Welcome back!", { position: "bottom-right" });
-          dispatch(saveToken(res.access_token));
-          dispatch(saveUser({email: data.email, id: res.id}))
+          dispatch(saveToken(res?.access_token));
+          console.log(res?.id);
           // {clientId:40, wishlist: [9,8]}
-
+          if (wishlist.length) {            
+            setWishlist({
+              clientId: res?.id,
+              wishlist: wishlist.map((item) => item.id),
+            })
+              .unwrap()
+              .then(() => {
+                dispatch(clearWishlist());
+              });
+          }
           // [6, 8] => [6, 8, 9]
           navigate("/auth/profile"); // Redirect qilish
         } else {

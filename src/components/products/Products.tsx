@@ -12,9 +12,10 @@ const Products = ({
 }: {
   data: IGetProducts;
   seeMoreBtn: boolean;
-  title: string;
+  title: any;
   countProducts: number;
 }) => {
+  console.log(data);
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
@@ -36,9 +37,9 @@ const Products = ({
           </Link>
 
           <div className="flex gap-3">
-            <button className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
+            <span className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
               <CartButton product={product} />
-            </button>
+            </span>
             <button className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
               Compare
             </button>
@@ -87,7 +88,7 @@ const Products = ({
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-4 md:gap-4">
-        {productItems.slice(0, countProducts).map((item, index) => (
+        {productItems?.slice(0, countProducts).map((item, index) => (
           <div key={index}>{item}</div>
         ))}
       </div>
