@@ -65,7 +65,7 @@ const SignIn = () => {
               });
           }
           // [6, 8] => [6, 8, 9]
-          navigate("/auth/profile"); // Redirect qilish
+          navigate("/auth/profile/self"); // Redirect qilish
         } else {
           dispatch(
             saveEmail({

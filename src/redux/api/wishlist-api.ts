@@ -9,7 +9,7 @@ const extendedApi = mainApi.injectEndpoints({
           method: "POST",
           body,
         }),
-        invalidatesTags: ["WISHLIST"],
+        invalidatesTags: ["WISHLIST", "PRODUCT"],
       }
     ),
     setWishlist: build.mutation<any, any>({
@@ -21,7 +21,6 @@ const extendedApi = mainApi.injectEndpoints({
       invalidatesTags: ["WISHLIST"],
     }),
     getWishlist: build.query<any, number>({
-
       query: (id: number) => ({
         url: `wishlist/client/${id}`,
         method: "GET",

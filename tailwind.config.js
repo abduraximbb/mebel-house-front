@@ -1,21 +1,22 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    theme: {
-        extend: {
-            fontFamily: {
-                poppins: ['"Poppins", sans-serif'],
-                "poppins-bold": ['"Poppins Bold", sans-serif'],
-                montserrat: ['"Montserrat", sans-serif'],
-            },
-            colors: {
-                "bg-primary": "#B88E2F",
-            },
-            backgroundImage: {
-                "hero-image": 'url("/assets/hero_home.png")',
-                "shop-image": 'url("/assets/hero_home.png")',
-            },
-        },
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  theme: {
+    extend: {
+      fontFamily: {
+        poppins: ['"Poppins", sans-serif'],
+        "poppins-bold": ['"Poppins Bold", sans-serif'],
+        montserrat: ['"Montserrat", sans-serif'],
+      },
+      colors: {
+        "bg-primary": "#B88E2F",
+      },
+      backgroundImage: {
+        "hero-image": 'url("/assets/hero_home.png")',
+        "shop-image": 'url("/assets/hero_home.png")',
+        "backgorund-image": 'url("/assets/backgound.png")',
+      },
+   
         container: {
             center: true,
             screens: {
