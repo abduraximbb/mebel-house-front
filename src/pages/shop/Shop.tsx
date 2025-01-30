@@ -21,6 +21,8 @@ const [category, setCategory] = useState<string>("");
 
   const { data: fetchedCategories } = useGetCategoriesQuery({});
 
+  
+
   const limitNum = 16;
  const minPrice = useRef<number | undefined>();
  const maxPrice = useRef<number | undefined>();
@@ -119,61 +121,74 @@ const [category, setCategory] = useState<string>("");
        setPage(1);
      };
 
+     const getResultText = () => {
+    if (isLoading) {
+      return "Pending results...";
+    }}
+
   return (
     <>
       <Hero />
       <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
-        <div className="container flex flex-wrap justify-between items-center gap-4 sm:gap-2">
-          <div className="flex items-center gap-6 sm:gap-4">
-            <div
-              className="flex items-center gap-3 cursor-pointer hover:text-bg-primary duration-300"
-              onClick={toggleFilter}
-            >
-              <GiSettingsKnobs className="w-6 h-6 md:w-5 md:h-5" />
-              <p className="text-xl md:text-base font-medium">Filter</p>
-            </div>
-            <div className="flex justify-center items-center cursor-pointer hover:text-bg-primary duration-300">
-              <PiCirclesFourFill className="w-7 h-7 md:w-6 md:h-6" />
-            </div>
-            <div className="flex justify-center items-center cursor-pointer hover:text-bg-primary duration-300">
-              <BsViewList className="w-7 h-7 md:w-6 md:h-6" />
-            </div>
-            <div className="hidden md:inline-block">|</div>
-            <div className="text-sm md:text-xs">
-              {isLoading
-                ? "Pending results..."
-                : data && data.total > 0
-                ? `Showing ${Math.min(
-                    (page - 1) * limitNum + 1,
-                    data.total
-                  )}–${Math.min(page * limitNum, data.total)} of ${
-                    data.total
-                  } results`
-                : "No results found"}
-            </div>
-          </div>
-          <div className="flex flex-wrap gap-4 md:gap-2 items-center">
-            <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300">
-              <p className="text-base md:text-sm">Sort by</p>
-              <select
-                value={sortBy}
-                onChange={handleSortChange}
-                className="w-48 h-14 md:w-32 md:h-12 bg-white dark:bg-slate-100 outline-none text-lg md:text-sm indent-3 rounded-sm text-bg-primary"
-              >
-                <option value="cheapest">Cheapest</option>
-                <option value="expensive">Most Expensive</option>
-                <option value="newest">Newest</option>
-                <option value="oldest">Oldest</option>
-              </select>
-            </div>
-            <button
-              onClick={applyFilter}
-              className="bg-bg-primary text-white p-3 rounded-sm hover:bg-yellow-600"
-            >
-              Show Results
-            </button>
-          </div>
+      <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
+      {/* Left Section: Filter, View Options */}
+      <div className="flex items-center gap-6 sm:gap-4 w-full sm:w-auto">
+        {/* Filter Button */}
+        <div
+          className="flex items-center gap-3 cursor-pointer hover:text-bg-primary duration-300 transform hover:scale-110"
+          onClick={toggleFilter}
+        >
+          <GiSettingsKnobs className="w-6 h-6 md:w-5 md:h-5" />
+          <p className="text-xl md:text-base font-semibold tracking-wide">Filter</p>
         </div>
+
+        {/* Grid View Icon */}
+        <div className="flex justify-center items-center cursor-pointer hover:text-bg-primary duration-300 transform hover:scale-110">
+          <PiCirclesFourFill className="w-7 h-7 md:w-6 md:h-6" />
+        </div>
+
+        {/* List View Icon */}
+        <div className="flex justify-center items-center cursor-pointer hover:text-bg-primary duration-300 transform hover:scale-110">
+          <BsViewList className="w-7 h-7 md:w-6 md:h-6" />
+        </div>
+
+        {/* Mobile Separator */}
+        <div className="hidden md:inline-block text-gray-300">|</div>
+
+        {/* Loading and Results Info */}
+        <div className="text-sm md:text-xs flex-grow text-center sm:text-left font-medium text-gray-500">
+          {getResultText()}
+        </div>
+      </div>
+
+      {/* Right Section: Sort and Show Results */}
+      <div className="flex flex-wrap gap-6 md:gap-2 items-center w-full sm:w-auto justify-between sm:justify-start">
+        {/* Sort By Dropdown */}
+        <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300 transform hover:scale-110">
+          <p className="text-base md:text-sm font-medium text-gray-600">Sort by</p>
+          <select
+            value={sortBy}
+            onChange={handleSortChange}
+            className="w-full sm:w-36 h-12 md:h-12 bg-white dark:bg-slate-100 outline-none text-lg md:text-sm indent-3 rounded-lg shadow-md transition-all focus:ring-4 focus:ring-bg-primary"
+          >
+            <option value="cheapest">Cheapest</option>
+            <option value="expensive">Most Expensive</option>
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+          </select>
+        </div>
+
+        {/* Show Results Button */}
+        <button
+          onClick={applyFilter}
+          className="bg-bg-primary text-white p-3 rounded-lg shadow-xl hover:bg-yellow-600 transform hover:scale-105 transition-all focus:ring-4 focus:ring-yellow-500"
+        >
+          Show Results
+        </button>
+      </div>
+    </div>
+
+
       </div>
       {isFilterOpen && (
         <div className="filter-panel bg-bg-primary p-4 rounded-md container mb-5">
