@@ -16,25 +16,24 @@ export default {
         "shop-image": 'url("/assets/hero_home.png")',
         "backgorund-image": 'url("/assets/backgound.png")',
       },
-   
-        container: {
-            center: true,
-            screens: {
-                sm: "600px",
-                md: "728px",
-                lg: "984px",
-                xl: "1240px",
-                "2xl": "1286px",
-            },
-            padding: {
-                DEFAULT: "1rem",
-                sm: "1rem",
-                lg: "0",
-                xl: "0",
-                "2xl": "0",
-            },
-        },
     },
-    plugins: [require("tailwind-scrollbar-hide")],
-}
-}
+    container: {
+      center: true,
+      screens: {
+        sm: "600px",
+        md: "728px",
+        lg: "984px",
+        xl: "1240px",
+        "2xl": "1286px",
+      },
+      padding: {
+        DEFAULT: "1rem",
+        sm: "1rem",
+        lg: "0",
+        xl: "0",
+        "2xl": "0",
+      },
+    },
+  },
+  plugins: [require("tailwind-scrollbar-hide")],
+};
