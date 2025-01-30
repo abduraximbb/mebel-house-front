@@ -9,7 +9,7 @@ const Wishlist = () => {
   const wishlist = useSelector((state: RootState) => state.wishlist.value);
   const token = useSelector((state: RootState) => state.token.access_token);
 
-  const { data } = useGetWishlistQuery(String(id));
+  const { data } = useGetWishlistQuery(Number(id));
   console.log({ data: wishlist });
 
   return (
