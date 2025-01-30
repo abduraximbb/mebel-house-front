@@ -1,8 +1,8 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { IoCartOutline } from "react-icons/io5";
 import { IGetProducts, IProduct } from "@/types";
 import Heart from "./Heart";
+import CartButton from "./CartButton";
 
 const Products = ({
   data,
@@ -18,7 +18,7 @@ const Products = ({
   const productItems = data?.data?.map((product: IProduct) => (
     <div
       key={product.id}
-      className="relative group overflow-hidden rounded-lg shadow-md bg-white transform transition-all duration-300 hover:shadow-lg"
+      className="relative group overflow-hidden shadow-md bg-white transform transition-all duration-300 hover:shadow-lg"
     >
       <div className="relative w-full h-[270px] sm:h-[250px] md:h-[260px] lg:h-[270px] block overflow-hidden">
         <img
@@ -37,7 +37,7 @@ const Products = ({
 
           <div className="flex gap-3">
             <button className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
-              <IoCartOutline className="text-lg text-primary" />
+              <CartButton product={product} />
             </button>
             <button className="bg-white p-2 rounded text-primary hover:bg-primary-light transition">
               Compare
@@ -87,7 +87,6 @@ const Products = ({
       </h2>
 
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-4 md:gap-4">
-
         {productItems.slice(0, countProducts).map((item, index) => (
           <div key={index}>{item}</div>
         ))}
