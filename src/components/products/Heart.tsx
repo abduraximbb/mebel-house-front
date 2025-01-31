@@ -58,12 +58,12 @@ const Heart = ({product}:{product: IProduct}) => {
 
       {token ? (
         heartState ? (
-          <IoMdHeart className="text-xl text-red-500" />
+          <IoMdHeart className="text-xl text-bg-primary" />
         ) : (
           <IoMdHeartEmpty />
         )
       ) : wishlist?.some((item) => item.id === product.id) ? (
-        <IoMdHeart className="text-xl text-red-500" />
+        <IoMdHeart className="text-xl text-bg-primary" />
       ) : (
         <IoMdHeartEmpty />
       )}
