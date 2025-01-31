@@ -7,10 +7,10 @@ import { lazy } from "react";
 import { useRoutes } from "react-router-dom";
 import SignIn from "../pages/auth/sign-in/SignIn";
 import Wishlist from "@/pages/wishlist/Wishlist";
-import Cart from "@/pages/cart/Cart";
 import Checkout from "@/pages/checkout/Checkout";
 import Self from "@/pages/auth/profile/self/Self";
 import Order from "@/pages/auth/profile/order/Order";
+import MainCart from "@/pages/cart/MainCart";
 const Home = lazy(() => import("@/pages/home/Home"));
 const Shop = lazy(() => import("@/pages/shop/Shop"));
 const Layout = lazy(() => import("@/pages/layout/Layout"));
@@ -57,7 +57,7 @@ const Routers = () => {
               path: "/cart",
               element: (
                 <SuspenseContainer>
-                  <Cart />
+                  <MainCart />
                 </SuspenseContainer>
               ),
             },

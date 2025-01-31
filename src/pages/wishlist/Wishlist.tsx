@@ -21,8 +21,6 @@ const Wishlist = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(tokenData);
-
   return (
     <>
       <Products
@@ -37,7 +35,6 @@ const Wishlist = () => {
           )
         }
       />
-      <h2>asd</h2>
     </>
   );
 };

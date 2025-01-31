@@ -4,13 +4,13 @@ import Products from "../../components/products/Products";
 import { Pagination } from "@mui/material";
 import { GiSettingsKnobs } from "react-icons/gi";
 import { BsViewList } from "react-icons/bs";
-import Hero from "./Hero";
 import { PiCirclesFourFill } from "react-icons/pi";
 import "./Shop.scss";
 import ShopInfo from "./ShopInfo";
 import { IProductQuery } from "../../types";
 import toast from "react-hot-toast";
 import { useGetCategoriesQuery } from "@/redux/api/category-api";
+import Hero from "@/components/hero/Hero";
 
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
@@ -128,7 +128,7 @@ const [category, setCategory] = useState<string>("");
 
   return (
     <>
-      <Hero />
+      <Hero pageName="Shop"/>
       <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
       <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
       {/* Left Section: Filter, View Options */}
