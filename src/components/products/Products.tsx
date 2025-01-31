@@ -64,10 +64,17 @@ const Products = ({
           {product.discount > 0 ? (
             <>
               <strong className="text-lg text-[#3A3A3A] font-poppins max-[620px]:text-base">
-                {product.price - (product.price * product.discount) / 100} USD
+                {product.price} USD
               </strong>
               <p className="text-gray-500 font-poppins text-sm max-[620px]:text-xs">
-                <del>{product.price.toLocaleString()} USD</del>
+                <del>
+                  {" "}
+                  {(
+                    product.price /
+                    (1 - Number(product.discount / 100))
+                  ).toLocaleString()}{" "}
+                  USD
+                </del>
               </p>
             </>
           ) : (
