@@ -14,7 +14,6 @@ import { useParamsHook } from "@/hooks/useParamsHook";
 import Skeleton from "@/components/products/Skeleton";
 import Info from "@/components/info/Info";
 
-
 const Shop = () => {
   const { setParam, getParam, removeParam } = useParamsHook();
   const page = Number(getParam("page")) || 1;
@@ -55,8 +54,11 @@ const Shop = () => {
     ...(sortBy === "cheapest" || sortBy === "expensive"
       ? { price: sortBy === "cheapest" ? "asc" : "desc" }
       : { order: sortBy === "oldest" ? "asc" : "desc" }),
-    ...(minPrice.current !== undefined && { minPrice: minPrice.current }),
-    ...(maxPrice.current !== undefined && { maxPrice: maxPrice.current }),
+      ...(minPrice.current !== undefined && { minPrice: minPrice.current }),
+      ...(maxPrice.current !== undefined && { maxPrice: maxPrice.current }),
+      // ...(typeof minPrice.current === "number" && { minPrice: minPrice.current }),
+      // ...(typeof maxPrice.current === "number" && { maxPrice: maxPrice.current }),
+
   };
 
   const { data, isLoading, isFetching } = useGetProductsQuery(query);
@@ -143,8 +145,6 @@ const Shop = () => {
 
   return (
     <>
-
-
       <Hero pageName="Shop"/>
       <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
         <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
@@ -174,8 +174,6 @@ const Shop = () => {
             {/* Mobile Separator */}
             <div className="hidden md:inline-block text-gray-300">|</div>
 
-
-      
         <button
           onClick={applyFilter}
           className="bg-bg-primary text-white p-3 rounded-lg shadow-xl hover:bg-yellow-600 transform hover:scale-105 transition-all focus:ring-4 focus:ring-yellow-500"
@@ -186,6 +184,7 @@ const Shop = () => {
     </div>
 
           {/* Right Section: Sort and Show Results */}
+          <div>
           <div className="flex flex-wrap gap-6 md:gap-2 items-center w-full sm:w-auto justify-between sm:justify-start">
             {/* Sort By Dropdown */}
             <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300 transform hover:scale-110">
@@ -247,7 +246,6 @@ const Shop = () => {
             </div>
           </div>
 
-       
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Category</p>
             <select
@@ -273,7 +271,7 @@ const Shop = () => {
             >
               <option value="price">Price</option>
               <option value="rating">Rating</option>
-              
+
             </select>
           </div>
         </div>

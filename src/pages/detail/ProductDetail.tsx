@@ -115,8 +115,8 @@ const ProductDetail = () => {
             {product.name}
           </h1>
           <p className="text-2xl text-gray-500 mt-2">
-            {product.discount.percent > 0
-              ? `RS. ${(product.price - product.discount.percent).toLocaleString()}`
+            {product.discount > 0
+              ? `RS. ${(product.price - product.discount).toLocaleString()}`
               : `RS. ${product.price.toLocaleString()}`}
           </p>
 
