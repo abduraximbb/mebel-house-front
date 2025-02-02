@@ -14,6 +14,7 @@ import { saveEmail } from "@/redux/features/otp-slice";
 import { RootState } from "../../../redux";
 import { useSetWishlistMutation } from "../../../redux/api/wishlist-api";
 import { clearWishlist } from "../../../redux/features/wishlist-slice";
+import { useParamsHook } from "@/hooks/useParamsHook";
 
 const schema = yup
   .object({
@@ -35,6 +36,7 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const wishlist = useSelector((state: RootState) => state.wishlist.value);
   const [setWishlist] = useSetWishlistMutation();
+  const {getParam} = useParamsHook()
 
 
   const {
@@ -64,8 +66,11 @@ const SignIn = () => {
                 dispatch(clearWishlist());
               });
           }
-          // [6, 8] => [6, 8, 9]
-          navigate("/auth/profile/self"); // Redirect qilish
+          if (getParam("q") === "checkout") {
+            return navigate("/checkout");
+          } else {
+            return navigate("/auth/profile/self");
+          }
         } else {
           dispatch(
             saveEmail({

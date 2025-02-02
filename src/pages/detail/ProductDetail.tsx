@@ -23,8 +23,8 @@ const ProductDetail = () => {
   });
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    window.scrollTo({behavior:"smooth", top:0,left:0});
+  }, [id,product]);
 
   useEffect(() => {
     const fetchProduct = async () => {

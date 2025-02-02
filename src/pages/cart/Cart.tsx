@@ -1,71 +1,3 @@
-// import { RootState } from "@/redux";
-// import {
-//   decrementAmountCart,
-//   ICartProduct,
-//   incrementAmountCart,
-// } from "@/redux/features/cart-slice";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-
-// const Cart = () => {
-//   const cart = useSelector((state: RootState) => state.cart.value);
-//   const navigate = useNavigate();
-
-//   const dispatch = useDispatch();
-
-//   return (
-//     <div className="container">
-//       {cart.length ? (
-//         <>
-//           <h2>Cart</h2>
-//           <div>
-//             {cart?.map((product: ICartProduct) => (
-//               <div className="py-2 border-b" key={product.id}>
-//                 <img
-//                   src={import.meta.env.VITE_BASE_IMAGE_URL + product.images[0]}
-//                   alt={product.name}
-//                   className="w-24"
-//                 />
-//                 <p>{product.name}</p>
-//                 <p>
-//                   {product.price} || {product.discount}
-//                 </p>
-//                 <div>
-//                   <button
-//                     disabled={product.amount <= 1}
-//                     onClick={() => dispatch(decrementAmountCart(product))}
-//                     className="bg-slate-300 p-2 disabled:opacity-30"
-//                   >
-//                     -
-//                   </button>
-//                   <span className="inline-block min-w-7 text-center">
-//                     {product.amount}
-//                   </span>
-//                   <button
-//                     disabled={product.stock <= product.amount}
-//                     onClick={() => dispatch(incrementAmountCart(product))}
-//                     className="bg-slate-300 p-2 disabled:opacity-30"
-//                   >
-//                     +
-//                   </button>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//           <button onClick={() => navigate("/checkout")}>CheckOut</button>
-//         </>
-//       ) : (
-//         <div>
-//           <h2>Empty</h2>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Cart;
-
-
 import { RootState } from "@/redux";
 import {
   decrementAmountCart,
@@ -83,11 +15,14 @@ const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state: RootState) => state.token.access_token);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const subtotal = cart.reduce(
     (acc, product) =>
+
       acc +
 
       (product.price * product.amount) / (1 - product.discount / 100),
@@ -98,6 +33,7 @@ const Cart = () => {
     (sum, product) => sum + product.price * product.amount,
     0
   );
+
 
   const handleCheckout = () => {
     token ? navigate("/checkout") : navigate("/auth/sign-in?q=checkout");
@@ -172,6 +108,7 @@ const Cart = () => {
 
                         <button
                           disabled={product.amount <= 1}
+
                           onClick={() =>
                             dispatch(decrementAmountCart(product))
                           }
@@ -192,6 +129,7 @@ const Cart = () => {
                         </span>
                         <button
                           disabled={product.stock <= product.amount}
+
                           onClick={() =>
                             dispatch(incrementAmountCart(product))
                           }
@@ -267,6 +205,7 @@ const Cart = () => {
 
                       <button
                         disabled={product.amount <= 1}
+
                         onClick={() =>
                           dispatch(decrementAmountCart(product))
                         }
@@ -280,6 +219,7 @@ const Cart = () => {
                       </span>
                       <button
                         disabled={product.stock <= product.amount}
+
                         onClick={() =>
                           dispatch(incrementAmountCart(product))
                         }
@@ -328,7 +268,7 @@ const Cart = () => {
 
         <div className="flex justify-between mb-6 max-sm:mb-4">
           <p className="text-lg font-bold text-black dark:text-white ">
-            Original Price:
+            Price:
           </p>
           <p className="text-lg text-[#9F9F9F] dark:text-[#B88E2F]">
             {total.toFixed(2)} USD
@@ -337,6 +277,7 @@ const Cart = () => {
 
         <div className="flex justify-between mb-6 max-sm:mb-4">
           <p className="text-lg font-bold text-black dark:text-white">
+
             Discounted Price (Total):
           </p>
           <p className="text-lg text-[#B88E2F] dark:text-[#FFD700]">
@@ -347,6 +288,7 @@ const Cart = () => {
 
         <div
           onClick={handleCheckout}
+
           className="flex justify-center pt-10 max-sm:pt-4"
         >
           <button
