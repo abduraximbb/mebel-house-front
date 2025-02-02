@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const Hero = ({pageName}:{pageName:string}) => {
   const navigate = useNavigate();
   return (
-    <div className="relative bg-backgorund-image bg-cover bg-center font-poppins">
+    <div className="relative bg-background-image bg-cover bg-center font-poppins">
       <div className="absolute inset-0  opacity-0 dark:opacity-50"></div>
       <div className="flex items-center container justify-center h-[316px] relative z-10">
         <div className="flex flex-col justify-center items-center">

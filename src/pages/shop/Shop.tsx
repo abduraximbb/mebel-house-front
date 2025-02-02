@@ -146,7 +146,7 @@ const Shop = () => {
   return (
     <>
       <Hero pageName="Shop"/>
-      <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
+      <div className="pl-16 bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid grid-cols-2 place-items-center font-poppins mb-16">
         <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
           {/* Left Section: Filter, View Options */}
           <div className="flex items-center gap-6 sm:gap-4 w-full sm:w-auto">
