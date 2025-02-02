@@ -47,7 +47,7 @@ const Heart = ({product}:{product: IProduct}) => {
   return (
     <button
       onClick={handleLike}
-      className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition"
+      className="bg-white p-3 rounded-lg text-primary hover:bg-bg-primary transition"
     >
       {/* {
         wishlist?.some((item) => item.id === product.id) ?
@@ -58,12 +58,12 @@ const Heart = ({product}:{product: IProduct}) => {
 
       {token ? (
         heartState ? (
-          <IoMdHeart className="text-xl text-red-500" />
+          <IoMdHeart className="text-xl text-bg-primary" />
         ) : (
           <IoMdHeartEmpty />
         )
       ) : wishlist?.some((item) => item.id === product.id) ? (
-        <IoMdHeart className="text-xl text-red-500" />
+        <IoMdHeart className="text-xl text-bg-primary" />
       ) : (
         <IoMdHeartEmpty />
       )}

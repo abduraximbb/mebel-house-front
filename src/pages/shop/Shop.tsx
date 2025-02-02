@@ -6,13 +6,14 @@ import { GiSettingsKnobs } from "react-icons/gi";
 import { BsViewList } from "react-icons/bs";
 import { PiCirclesFourFill } from "react-icons/pi";
 import "./Shop.scss";
-import ShopInfo from "./ShopInfo";
 import { IProductQuery } from "../../types";
 import toast from "react-hot-toast";
 import { useGetCategoriesQuery } from "@/redux/api/category-api";
 import Hero from "@/components/hero/Hero";
 import { useParamsHook } from "@/hooks/useParamsHook";
 import Skeleton from "@/components/products/Skeleton";
+import Info from "@/components/info/Info";
+
 
 const Shop = () => {
   const { setParam, getParam, removeParam } = useParamsHook();
@@ -47,6 +48,7 @@ const Shop = () => {
   ];
 
   // Create query object dynamically based on sortBy
+
   const query: IProductQuery = {
     limit: limitNum,
     page,
@@ -82,6 +84,7 @@ const Shop = () => {
     setSortBy(value);
     // setPage(1); // Reset to the first page when sorting changes
     setParam("page", "1");
+
   };
 
   const handlePriceChange = (
@@ -140,7 +143,9 @@ const Shop = () => {
 
   return (
     <>
-      <Hero pageName="Shop" />
+
+
+      <Hero pageName="Shop"/>
       <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
         <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
           {/* Left Section: Filter, View Options */}
@@ -169,11 +174,16 @@ const Shop = () => {
             {/* Mobile Separator */}
             <div className="hidden md:inline-block text-gray-300">|</div>
 
-            {/* Loading and Results Info */}
-            <div className="text-sm md:text-xs flex-grow text-center sm:text-left font-medium text-gray-500">
-              {getResultText()}
-            </div>
-          </div>
+
+      
+        <button
+          onClick={applyFilter}
+          className="bg-bg-primary text-white p-3 rounded-lg shadow-xl hover:bg-yellow-600 transform hover:scale-105 transition-all focus:ring-4 focus:ring-yellow-500"
+        >
+          Show Results
+        </button>
+      </div>
+    </div>
 
           {/* Right Section: Sort and Show Results */}
           <div className="flex flex-wrap gap-6 md:gap-2 items-center w-full sm:w-auto justify-between sm:justify-start">
@@ -237,7 +247,7 @@ const Shop = () => {
             </div>
           </div>
 
-          {/* Category Filter */}
+       
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Category</p>
             <select
@@ -254,7 +264,6 @@ const Shop = () => {
             </select>
           </div>
 
-          {/* Sorting Filter */}
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Sort by</p>
             <select
@@ -264,7 +273,7 @@ const Shop = () => {
             >
               <option value="price">Price</option>
               <option value="rating">Rating</option>
-              {/* Add other sorting options as needed */}
+              
             </select>
           </div>
         </div>
@@ -323,7 +332,7 @@ const Shop = () => {
           </div>
         )}
       </section>
-      <ShopInfo />
+      <Info/>
     </>
   );
 };

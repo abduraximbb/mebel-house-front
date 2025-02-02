@@ -17,3 +17,14 @@
     src: url(/src/assets/fonts/Montserrat-Medium.ttf);
   }
 }
+body.light {
+  background-color: #ffffff;
+  color: #18181b;
+  transition: background-color 300ms, color 300ms;
+}
+
+body.dark {
+  background-color: #18181b;
+  color: #ffffff;
+  transition: background-color 300ms, color 300ms;
+}
