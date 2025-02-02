@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { IGetProducts, IProduct } from "@/types";
 import Heart from "./Heart";
 import CartButton from "./CartButton";
+import Discount from "./Discount";
 
 const Products = ({
   data,
@@ -47,6 +48,10 @@ const Products = ({
         </div>
       </div>
 
+      {!!product.discount?.percent && (
+        <Discount percent={Number(product.discount?.percent)} />
+      )}
+
       <div className="py-3 px-2 bg-[#F8F9FA] transition-colors duration-300">
         <h2
           title={product.name}
@@ -61,9 +66,10 @@ const Products = ({
           {product.description}
         </p>
         <div className="flex mt-2 items-center justify-between text-sm">
-          {product.discount > 0 ? (
+          {!!product.discount?.percent ? (
             <>
               <strong className="text-lg text-[#3A3A3A] font-poppins max-[620px]:text-base">
+
                 {product.price} USD
               </strong>
               <p className="text-gray-500 font-poppins text-sm max-[620px]:text-xs">

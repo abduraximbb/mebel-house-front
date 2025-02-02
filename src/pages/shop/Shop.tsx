@@ -6,11 +6,12 @@ import { GiSettingsKnobs } from "react-icons/gi";
 import { BsViewList } from "react-icons/bs";
 import { PiCirclesFourFill } from "react-icons/pi";
 import "./Shop.scss";
-import ShopInfo from "./ShopInfo";
 import { IProductQuery } from "../../types";
 import toast from "react-hot-toast";
 import { useGetCategoriesQuery } from "@/redux/api/category-api";
 import Hero from "@/components/hero/Hero";
+import Info from "@/components/info/Info";
+
 
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
@@ -35,8 +36,6 @@ const [category, setCategory] = useState<string>("");
    { id: "2", name: "Category 2" },
  ];
 
-
-  // Create query object dynamically based on sortBy
   const query: IProductQuery = {
     limit: limitNum,
     page,
@@ -67,7 +66,7 @@ const [category, setCategory] = useState<string>("");
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setSortBy(value);
-    setPage(1); // Reset to the first page when sorting changes
+    setPage(1); 
   };
 
     const handlePriceChange = (
@@ -128,6 +127,7 @@ const [category, setCategory] = useState<string>("");
 
   return (
     <>
+
       <Hero pageName="Shop"/>
       <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
       <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
@@ -178,7 +178,7 @@ const [category, setCategory] = useState<string>("");
           </select>
         </div>
 
-        {/* Show Results Button */}
+      
         <button
           onClick={applyFilter}
           className="bg-bg-primary text-white p-3 rounded-lg shadow-xl hover:bg-yellow-600 transform hover:scale-105 transition-all focus:ring-4 focus:ring-yellow-500"
@@ -222,7 +222,7 @@ const [category, setCategory] = useState<string>("");
             </div>
           </div>
 
-          {/* Category Filter */}
+       
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Category</p>
             <select
@@ -239,7 +239,6 @@ const [category, setCategory] = useState<string>("");
             </select>
           </div>
 
-          {/* Sorting Filter */}
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Sort by</p>
             <select
@@ -249,7 +248,7 @@ const [category, setCategory] = useState<string>("");
             >
               <option value="price">Price</option>
               <option value="rating">Rating</option>
-              {/* Add other sorting options as needed */}
+              
             </select>
           </div>
         </div>
@@ -306,7 +305,7 @@ const [category, setCategory] = useState<string>("");
           />
         </div>
       </section>
-      <ShopInfo />
+      <Info/>
     </>
   );
 };

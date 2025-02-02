@@ -19,7 +19,9 @@ export interface IProduct {
   price: number;
   colors: string[];
   tags: string[];
-  discount: number;
+  discount: {
+    percent:number;
+  };
   categoryId?: number;
   isLike?: boolean;
 }

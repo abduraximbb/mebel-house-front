@@ -7,7 +7,7 @@ import { useCheckTokenQuery } from "../../redux/api/customer-api";
 import { useEffect } from "react";
 
 const Wishlist = () => {
-  // const id = useSelector((state: RootState) => state.user.value.id);
+
   const wishlist = useSelector((state: RootState) => state.wishlist.value);
   const token = useSelector((state: RootState) => state.token.access_token);
   const { data: tokenData } = useCheckTokenQuery(null, {

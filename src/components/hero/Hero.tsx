@@ -1,6 +1,7 @@
 import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 
+
 const Hero = ({pageName}:{pageName:string}) => {
   const navigate = useNavigate();
   return (
@@ -18,6 +19,7 @@ const Hero = ({pageName}:{pageName:string}) => {
             >
               Home
             </span>
+
             <MdOutlineArrowForwardIos className="inline-block" />
             <span
               onClick={() => navigate("/shop")}

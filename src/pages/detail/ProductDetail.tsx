@@ -83,17 +83,8 @@ const ProductDetail = () => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
     >
-
-
-
-
-
-
-
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* Left Section */}
         <div className="flex flex-col space-y-6">
-  {/* Thumbnail Images with Horizontal Scroll */}
   <div className="overflow-x-auto flex space-x-1 pb-2 scrollbar-hide">
     <div className="flex space-x-1 w-fit min-w-[500px] px-1">
       {product.images.map((img, index) => (
@@ -111,8 +102,6 @@ const ProductDetail = () => {
       ))}
     </div>
   </div>
-
-  {/* Main Image */}
   <div className="overflow-hidden rounded-xl shadow-lg">
     <img
       src={selectedImage}
@@ -121,20 +110,13 @@ const ProductDetail = () => {
     />
   </div>
 </div>
-
-
-
-
-
-        
-
         <div>
           <h1 className="text-4xl font-bold text-gray-800 dark:text-black">
             {product.name}
           </h1>
           <p className="text-2xl text-gray-500 mt-2">
-            {product.discount > 0
-              ? `RS. ${(product.price - product.discount).toLocaleString()}`
+            {product.discount.percent > 0
+              ? `RS. ${(product.price - product.discount.percent).toLocaleString()}`
               : `RS. ${product.price.toLocaleString()}`}
           </p>
 
