@@ -47,7 +47,7 @@ const Heart = ({product}:{product: IProduct}) => {
   return (
     <button
       onClick={handleLike}
-      className="bg-white p-3 rounded-lg text-primary hover:bg-primary-light transition"
+      className="bg-white p-3 rounded-lg text-primary hover:bg-bg-primary transition"
     >
       {/* {
         wishlist?.some((item) => item.id === product.id) ?

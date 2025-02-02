@@ -8,6 +8,8 @@ import { useRoutes } from "react-router-dom";
 import SignIn from "../pages/auth/sign-in/SignIn";
 import Wishlist from "@/pages/wishlist/Wishlist";
 import Cart from "@/pages/cart/Cart";
+import MainContactPage from "@/pages/contact/MainContactPage"; 
+
 const Home = lazy(() => import("@/pages/home/Home"));
 const Shop = lazy(() => import("@/pages/shop/Shop"));
 const Layout = lazy(() => import("@/pages/layout/Layout"));
@@ -59,6 +61,14 @@ const Routers = () => {
               ),
             },
             {
+              path: "/contact", 
+              element: (
+                <SuspenseContainer>
+                  <MainContactPage />
+                </SuspenseContainer>
+              ),
+            },
+            {
               path: "/auth",
               element: (
                 <SuspenseContainer>
@@ -76,7 +86,6 @@ const Routers = () => {
                 },
               ],
             },
-
             {
               path: "product/:id",
               element: (

@@ -7,24 +7,20 @@ import { IoCartOutline, IoCart } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { useCheckTokenQuery } from "../../redux/api/customer-api";
 
-const CartButton = ({ product }: { product: IProduct }) => {
+const CartButton = ({ product }: { product?: IProduct }) => {
+  if (!product) return null; 
+
   const [toggleCart] = useToggleCartMutation();
   const dispatch = useDispatch();
-  const cart = useSelector((state: RootState) => state.cart.value);
+  const cart = useSelector((state: RootState) => state.cart.value) || [];
   const token = useSelector((state: RootState) => state.token.access_token);
   const { data } = useCheckTokenQuery(null, { skip: Boolean(!token) });
 
-  const initialState = {
-    id: 0,
+  const [currentCart, setCurrentCart] = useState({
+    id: product.id,
     state: cart.some((item) => item.id === product.id),
     clicked: false,
-  };
-
-  const [currentCart, setCurrentCart] = useState<{
-    id: number;
-    state: boolean;
-    clicked: boolean;
-  }>(initialState);
+  });
 
   const handleCart = () => {
     setCurrentCart({
@@ -40,7 +36,7 @@ const CartButton = ({ product }: { product: IProduct }) => {
       });
     } else {
       if (cart.some((item) => item.id === product.id)) {
-        dispatch(deleteCart(product));
+        dispatch(deleteCart());
       } else {
         dispatch(addCart(product));
       }
