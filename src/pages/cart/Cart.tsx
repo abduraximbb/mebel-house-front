@@ -1,71 +1,3 @@
-// import { RootState } from "@/redux";
-// import {
-//   decrementAmountCart,
-//   ICartProduct,
-//   incrementAmountCart,
-// } from "@/redux/features/cart-slice";
-// import { useDispatch, useSelector } from "react-redux";
-// import { useNavigate } from "react-router-dom";
-
-// const Cart = () => {
-//   const cart = useSelector((state: RootState) => state.cart.value);
-//   const navigate = useNavigate();
-
-//   const dispatch = useDispatch();
-
-//   return (
-//     <div className="container">
-//       {cart.length ? (
-//         <>
-//           <h2>Cart</h2>
-//           <div>
-//             {cart?.map((product: ICartProduct) => (
-//               <div className="py-2 border-b" key={product.id}>
-//                 <img
-//                   src={import.meta.env.VITE_BASE_IMAGE_URL + product.images[0]}
-//                   alt={product.name}
-//                   className="w-24"
-//                 />
-//                 <p>{product.name}</p>
-//                 <p>
-//                   {product.price} || {product.discount}
-//                 </p>
-//                 <div>
-//                   <button
-//                     disabled={product.amount <= 1}
-//                     onClick={() => dispatch(decrementAmountCart(product))}
-//                     className="bg-slate-300 p-2 disabled:opacity-30"
-//                   >
-//                     -
-//                   </button>
-//                   <span className="inline-block min-w-7 text-center">
-//                     {product.amount}
-//                   </span>
-//                   <button
-//                     disabled={product.stock <= product.amount}
-//                     onClick={() => dispatch(incrementAmountCart(product))}
-//                     className="bg-slate-300 p-2 disabled:opacity-30"
-//                   >
-//                     +
-//                   </button>
-//                 </div>
-//               </div>
-//             ))}
-//           </div>
-//           <button onClick={() => navigate("/checkout")}>CheckOut</button>
-//         </>
-//       ) : (
-//         <div>
-//           <h2>Empty</h2>
-//         </div>
-//       )}
-//     </div>
-//   );
-// };
-
-// export default Cart;
-
-
 import { RootState } from "@/redux";
 import {
   decrementAmountCart,
@@ -82,13 +14,14 @@ const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.value);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const token = useSelector((state: RootState) => state.token.access_token);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
   const subtotal = cart.reduce(
     (acc, product) =>
-      acc +
-      (product.price * product.amount) / (1 - product.discount / 100),
+      acc + (product.price * product.amount) / (1 - product.discount / 100),
     0
   );
 
@@ -96,6 +29,14 @@ const Cart = () => {
     (sum, product) => sum + product.price * product.amount,
     0
   );
+
+  const handleCheckout = () => {  
+    if (token) {
+      navigate("/checkout");
+    } else {
+      navigate("/auth/sign-in?q=checkout");
+    }
+  };
 
   return (
     <div className="container mx-auto p-4 flex  flex-col lg:flex-row gap-6 dark:bg-zinc-900">
@@ -138,9 +79,7 @@ const Cart = () => {
                       <div className="flex items-center gap-2 justify-center">
                         <button
                           disabled={product.amount <= 1}
-                          onClick={() =>
-                            dispatch(decrementAmountCart(product))
-                          }
+                          onClick={() => dispatch(decrementAmountCart(product))}
                           className="text-xl px-2 py-1 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
                         >
                           −
@@ -150,9 +89,7 @@ const Cart = () => {
                         </span>
                         <button
                           disabled={product.stock <= product.amount}
-                          onClick={() =>
-                            dispatch(incrementAmountCart(product))
-                          }
+                          onClick={() => dispatch(incrementAmountCart(product))}
                           className="text-xl px-2 py-1 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition"
                         >
                           +
@@ -217,9 +154,7 @@ const Cart = () => {
                     <div className="flex items-center gap-3 bg-gray-100 dark:bg-zinc-800 px-3 py-2 rounded-lg shadow-sm">
                       <button
                         disabled={product.amount <= 1}
-                        onClick={() =>
-                          dispatch(decrementAmountCart(product))
-                        }
+                        onClick={() => dispatch(decrementAmountCart(product))}
                         className="text-xl px-3 py-1 rounded-lg bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600 disabled:opacity-50 disabled:cursor-not-allowed transition"
                       >
                         −
@@ -229,9 +164,7 @@ const Cart = () => {
                       </span>
                       <button
                         disabled={product.stock <= product.amount}
-                        onClick={() =>
-                          dispatch(incrementAmountCart(product))
-                        }
+                        onClick={() => dispatch(incrementAmountCart(product))}
                         className="text-xl px-3 py-1 rounded-lg bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600 disabled:opacity-50 disabled:cursor-not-allowed transition"
                       >
                         +
@@ -273,9 +206,7 @@ const Cart = () => {
         </h3>
 
         <div className="flex justify-between mb-6">
-          <p className="text-lg font-bold text-black dark:text-white">
-            Price:
-          </p>
+          <p className="text-lg font-bold text-black dark:text-white">Price:</p>
           <p className="text-lg text-[#9F9F9F] dark:text-[#B88E2F]">
             {total.toFixed(2)} USD
           </p>
@@ -283,15 +214,15 @@ const Cart = () => {
 
         <div className="flex justify-between mb-6">
           <p className="text-lg font-bold text-black dark:text-white">
-          Your savings:
+            Your savings:
           </p>
           <p className="text-lg text-[#B88E2F] dark:text-[#FFD700]">
-            {(subtotal-total).toFixed(2)} USD
+            {(subtotal - total).toFixed(2)} USD
           </p>
         </div>
 
         <div
-          onClick={() => navigate("/checkout")}
+          onClick={handleCheckout}
           className="flex justify-center pt-10"
         >
           <button
