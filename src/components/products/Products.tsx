@@ -48,8 +48,8 @@ const Products = ({
         </div>
       </div>
 
-      {!!product.discount?.percent && (
-        <Discount percent={Number(product.discount?.percent)} />
+      {!!product.discount && (
+        <Discount percent={Number(product.discount)} />
       )}
 
       <div className="py-3 px-2 bg-[#F8F9FA] transition-colors duration-300">
@@ -66,7 +66,7 @@ const Products = ({
           {product.description}
         </p>
         <div className="flex mt-2 items-center justify-between text-sm">
-          {!!product.discount?.percent ? (
+          {!!product.discount ? (
             <>
               <strong className="text-lg text-[#3A3A3A] font-poppins max-[620px]:text-base">
 

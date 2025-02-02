@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoTrashOutline } from "react-icons/io5";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import empty_cart from "@/assets/images/empty_cart.jpg"
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.value);
