@@ -54,7 +54,6 @@ const SignIn = () => {
         if (res?.access_token) {
           toast.success("Welcome back!", { position: "bottom-right" });
           dispatch(saveToken(res?.access_token));
-          console.log(res?.id);
           // {clientId:40, wishlist: [9,8]}
           if (wishlist.length) {            
             setWishlist({
