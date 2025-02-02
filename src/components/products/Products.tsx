@@ -69,11 +69,19 @@ const Products = ({
           {!!product.discount?.percent ? (
             <>
               <strong className="text-lg text-[#3A3A3A] font-poppins max-[620px]:text-base">
-                {(product.price * (1 - product.discount.percent / 100)).toLocaleString()} USD
+
+                {product.price} USD
               </strong>
-              <s className="ml-2 text-gray-500 font-poppins text-sm max-[620px]:text-xs">
-                {product.price.toLocaleString()} USD
-              </s>
+              <p className="text-gray-500 font-poppins text-sm max-[620px]:text-xs">
+                <del>
+                  {" "}
+                  {(
+                    product.price /
+                    (1 - Number(product.discount / 100))
+                  ).toLocaleString()}{" "}
+                  USD
+                </del>
+              </p>
             </>
           ) : (
             <strong className="text-lg text-[#3A3A3A] font-poppins max-[620px]:text-base">

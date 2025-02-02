@@ -28,7 +28,10 @@ export const cartSlice = createSlice({
         localStorage.setItem("cart", JSON.stringify(state.value));
       }
     },
-    deleteCart() {},
+    deleteCart(state, action: PayloadAction<IProduct>) {
+      state.value = state.value.filter((item) => item.id !== action.payload.id);
+      localStorage.setItem("cart", JSON.stringify(state.value));
+    },
     incrementAmountCart(state, action: PayloadAction<IProduct>) {
       let index = state.value.findIndex(
         (item) => item.id === action.payload.id

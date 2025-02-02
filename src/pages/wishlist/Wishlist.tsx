@@ -21,8 +21,6 @@ const Wishlist = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  console.log(tokenData);
-
   return (
     <>
       <Products
@@ -31,7 +29,7 @@ const Wishlist = () => {
         countProducts={Infinity}
         title={
           data?.data?.length > 0 || wishlist?.length > 0 ? (
-            "Yours like products"
+            "Wishlist"
           ) : (
             <EmptyWishlist />
           )

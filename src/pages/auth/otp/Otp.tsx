@@ -66,7 +66,7 @@ export default function OTPInput() {
           dispatch(clearOtp());
         }, 300);
         dispatch(saveToken(res.access_token));
-        navigate("/auth/profile");
+        navigate("/auth/profile/self");
       });
     }
   }, [otp]);

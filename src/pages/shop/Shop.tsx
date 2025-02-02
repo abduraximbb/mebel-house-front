@@ -12,6 +12,7 @@ import { useGetCategoriesQuery } from "@/redux/api/category-api";
 import Hero from "@/components/hero/Hero";
 import Info from "@/components/info/Info";
 
+
 const Shop = () => {
   const [page, setPage] = useState<number>(1);
   const [sortBy, setSortBy] = useState<string>("cheapest");
@@ -126,7 +127,8 @@ const [category, setCategory] = useState<string>("");
 
   return (
     <>
-      <Hero title="Shop" path="/shop"/>
+
+      <Hero pageName="Shop"/>
       <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
       <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
       {/* Left Section: Filter, View Options */}

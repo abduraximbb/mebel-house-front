@@ -16,3 +16,19 @@ export const links = [
     href: "/contact",
   },
 ];
+
+export const REGIONS = [
+  "Tashkent",
+  "Namangan",
+  "Andijan",
+  "Fergana",
+  "Jizzakh",
+  "Samarkand",
+  "Bukhara",
+  "Kashkadarya",
+  "Surkhandarya",
+  "Sirdarya",
+  "Navoi",
+  "Khorezm",
+  "Karakalpakstan",
+];
