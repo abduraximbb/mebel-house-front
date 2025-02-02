@@ -36,7 +36,7 @@ const CartButton = ({ product }: { product?: IProduct }) => {
       });
     } else {
       if (cart.some((item) => item.id === product.id)) {
-        dispatch(deleteCart());
+        dispatch(deleteCart(product));
       } else {
         dispatch(addCart(product));
       }

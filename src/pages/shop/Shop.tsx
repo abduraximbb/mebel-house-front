@@ -137,11 +137,11 @@ const Shop = () => {
     setParam("page", 1);
   };
 
-  const getResultText = () => {
-    if (isLoading) {
-      return "Pending results...";
-    }
-  };
+  // const getResultText = () => {
+  //   if (isLoading) {
+  //     return "Pending results...";
+  //   }
+  // };
 
   return (
     <>

@@ -5,7 +5,7 @@ import Info from "@/components/info/Info"
 const MainContactPage = () => {
   return (
     <>
-        <Hero title="Contact" path="/contact" />
+        <Hero  pageName="Contact" />
         <Contact/>
         <Info/>
     </>

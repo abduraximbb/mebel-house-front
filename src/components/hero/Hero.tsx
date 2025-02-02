@@ -22,7 +22,6 @@ const Hero = ({pageName}:{pageName:string}) => {
 
             <MdOutlineArrowForwardIos className="inline-block" />
             <span
-              onClick={() => navigate("/shop")}
               className="font-light cursor-pointer hover:text-bg-primary duration-300"
             >
               {pageName}
