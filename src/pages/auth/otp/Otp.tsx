@@ -12,13 +12,15 @@ import { saveToken } from "@/redux/features/token-slice";
 import Timer from "./Timer";
 import { clearOtp } from "@/redux/features/otp-slice";
 import OTP from "./OtpElement";
+import { clearWishlist } from "../../../redux/features/wishlist-slice";
+import { useSetWishlistMutation } from "../../../redux/api/wishlist-api";
+import { useParamsHook } from "../../../hooks/useParamsHook";
 
 export default function OTPInput() {
-  const { email,verification_key } = useSelector(
+  const { email, verification_key } = useSelector(
     (state: RootState) => state.otp
   );
- 
-  
+
   const dispatch = useDispatch();
 
   const [otp, setOtp] = React.useState("");
@@ -27,24 +29,26 @@ export default function OTPInput() {
   const [createOtp, { isLoading: otpLoading, isError: otpError, error }] =
     useCreateOtpMutation();
   const navigate = useNavigate();
-
+  const wishlist = useSelector((state: RootState) => state.wishlist.value);
+  const [setWishlist] = useSetWishlistMutation();
+  const { getParam } = useParamsHook();
   // const createNewOtp = () => {
   //   createOtp({ email: email });
   //   setReload(!reload);
   //   // console.log(email, reload);
   // };
 
-    const handleResendOtp = () => {
-      createOtp({ email })
-        .unwrap()
-        .then((res) => {
-          sessionStorage.setItem("verification_key", res.verification_key);
-          setReload(!reload);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    };
+  const handleResendOtp = () => {
+    createOtp({ email })
+      .unwrap()
+      .then((res) => {
+        sessionStorage.setItem("verification_key", res.verification_key);
+        setReload(!reload);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   React.useEffect(() => {
     // createOtp({ email: email });
@@ -58,16 +62,28 @@ export default function OTPInput() {
       verifyOtp({
         email,
         otp,
-        verification_key
+        verification_key,
       })
-      .unwrap()
-      .then((res) => {
-        setTimeout(() => {
-          dispatch(clearOtp());
-        }, 300);
-        dispatch(saveToken(res.access_token));
-        navigate("/auth/profile/self");
-      });
+        .unwrap()
+        .then((res) => {
+          setTimeout(() => {
+            dispatch(clearOtp());
+          }, 300);
+          dispatch(saveToken(res.access_token));
+          if (wishlist.length) {
+            setWishlist({
+              clientId: res?.user?.id,
+              wishlist: wishlist.map((item) => item.id),
+            })
+              .unwrap()
+              .then(() => {
+                dispatch(clearWishlist());
+              });
+          }
+          getParam("q") === "checkout"
+            ? navigate("/checkout")
+            : navigate("/auth/profile/self");
+        });
     }
   }, [otp]);
 
@@ -146,8 +162,6 @@ export default function OTPInput() {
   );
 }
 
-
-
 // import React, { useState } from "react";
 // import { Box } from "@mui/system";
 // import { CircularProgress, Typography } from "@mui/material";
@@ -194,17 +208,17 @@ export default function OTPInput() {
 //       });
 //   };
 
-  // const handleResendOtp = () => {
-  //   createOtp({ email })
-  //     .unwrap()
-  //     .then((res) => {
-  //       sessionStorage.setItem("verification_key", res.verification_key);
-  //       setReload(!reload);
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
+// const handleResendOtp = () => {
+//   createOtp({ email })
+//     .unwrap()
+//     .then((res) => {
+//       sessionStorage.setItem("verification_key", res.verification_key);
+//       setReload(!reload);
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     });
+// };
 
 //   if (!email || !verification_key) {
 //     return <Navigate to="/auth/sign-up" />;
