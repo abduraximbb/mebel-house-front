@@ -10,16 +10,11 @@ import { IProductQuery } from "../../types";
 import toast from "react-hot-toast";
 import { useGetCategoriesQuery } from "@/redux/api/category-api";
 import Hero from "@/components/hero/Hero";
-import { useParamsHook } from "@/hooks/useParamsHook";
-import Skeleton from "@/components/products/Skeleton";
-import Info from "@/components/info/Info";
+import Info from "../../components/info/Info";
 
 const Shop = () => {
-  const { setParam, getParam, removeParam } = useParamsHook();
-  const page = Number(getParam("page")) || 1;
-  const sortBy = getParam("sort") || "newest";
-  // const [page, setPage] = useState<number>(1);
-  // const [sortBy, setSortBy] = useState<string>("cheapest");
+  const [page, setPage] = useState<number>(1);
+  const [sortBy, setSortBy] = useState<string>("cheapest");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [isFilterApplied, setIsFilterApplied] = useState(false);
   const [category, setCategory] = useState<string>("");
@@ -30,14 +25,6 @@ const Shop = () => {
   const minPrice = useRef<number | undefined>();
   const maxPrice = useRef<number | undefined>();
 
-  const setSortBy = (value: string) => {
-    if (value === "newest") {
-      removeParam("sort");
-    } else {
-      setParam("sort", value);
-    }
-  };
-
   const categories = fetchedCategories?.data.map((category: any) => ({
     id: category.id,
     name: category.name,
@@ -47,21 +34,17 @@ const Shop = () => {
   ];
 
   // Create query object dynamically based on sortBy
-
   const query: IProductQuery = {
     limit: limitNum,
     page,
     ...(sortBy === "cheapest" || sortBy === "expensive"
       ? { price: sortBy === "cheapest" ? "asc" : "desc" }
       : { order: sortBy === "oldest" ? "asc" : "desc" }),
-      ...(minPrice.current !== undefined && { minPrice: minPrice.current }),
-      ...(maxPrice.current !== undefined && { maxPrice: maxPrice.current }),
-      // ...(typeof minPrice.current === "number" && { minPrice: minPrice.current }),
-      // ...(typeof maxPrice.current === "number" && { maxPrice: maxPrice.current }),
-
+    ...(minPrice.current !== undefined && { minPrice: minPrice.current }),
+    ...(maxPrice.current !== undefined && { maxPrice: maxPrice.current }),
   };
 
-  const { data, isLoading, isFetching } = useGetProductsQuery(query);
+  const { data, isLoading } = useGetProductsQuery(query);
   const totalPages = data ? Math.ceil(data?.total / limitNum) : 0;
 
   useEffect(() => {
@@ -73,20 +56,13 @@ const Shop = () => {
     value: number
   ) => {
     event.preventDefault();
-    // setPage(value);
-    if (value === 1) {
-      removeParam("page");
-    } else {
-      setParam("page", value);
-    }
+    setPage(value);
   };
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const value = event.target.value;
     setSortBy(value);
-    // setPage(1); // Reset to the first page when sorting changes
-    setParam("page", "1");
-
+    setPage(1); // Reset to the first page when sorting changes
   };
 
   const handlePriceChange = (
@@ -133,20 +109,19 @@ const Shop = () => {
 
   const applyFilter = () => {
     setIsFilterApplied(!isFilterApplied);
-    // setPage(1);
-    setParam("page", 1);
+    setPage(1);
   };
 
-  // const getResultText = () => {
-  //   if (isLoading) {
-  //     return "Pending results...";
-  //   }
-  // };
+  const getResultText = () => {
+    if (isLoading) {
+      return "Pending results...";
+    }
+  };
 
   return (
     <>
-      <Hero pageName="Shop"/>
-      <div className="pl-16 bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid grid-cols-2 place-items-center font-poppins mb-16">
+      <Hero pageName="Shop" />
+      <div className="bg-[#faf3ea] dark:bg-[#faf3ea] h-[100px] grid place-items-center font-poppins mb-16">
         <div className="container flex flex-wrap justify-between items-center gap-6 sm:gap-2">
           {/* Left Section: Filter, View Options */}
           <div className="flex items-center gap-6 sm:gap-4 w-full sm:w-auto">
@@ -174,17 +149,13 @@ const Shop = () => {
             {/* Mobile Separator */}
             <div className="hidden md:inline-block text-gray-300">|</div>
 
-        <button
-          onClick={applyFilter}
-          className="bg-bg-primary text-white p-3 rounded-lg shadow-xl hover:bg-yellow-600 transform hover:scale-105 transition-all focus:ring-4 focus:ring-yellow-500"
-        >
-          Show Results
-        </button>
-      </div>
-    </div>
+            {/* Loading and Results Info */}
+            <div className="text-sm md:text-xs flex-grow text-center sm:text-left font-medium text-gray-500">
+              {getResultText()}
+            </div>
+          </div>
 
           {/* Right Section: Sort and Show Results */}
-          <div>
           <div className="flex flex-wrap gap-6 md:gap-2 items-center w-full sm:w-auto justify-between sm:justify-start">
             {/* Sort By Dropdown */}
             <div className="flex items-center gap-2 cursor-pointer hover:text-bg-primary duration-300 transform hover:scale-110">
@@ -194,7 +165,6 @@ const Shop = () => {
               <select
                 value={sortBy}
                 onChange={handleSortChange}
-                defaultValue="newest"
                 className="w-full sm:w-36 h-12 md:h-12 bg-white dark:bg-slate-100 outline-none text-lg md:text-sm indent-3 rounded-lg shadow-md transition-all focus:ring-4 focus:ring-bg-primary"
               >
                 <option value="cheapest">Cheapest</option>
@@ -246,6 +216,7 @@ const Shop = () => {
             </div>
           </div>
 
+          {/* Category Filter */}
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Category</p>
             <select
@@ -262,6 +233,7 @@ const Shop = () => {
             </select>
           </div>
 
+          {/* Sorting Filter */}
           <div className="flex items-center gap-2 cursor-pointer hover:text-white duration-300 mt-4">
             <p className="text-base md:text-sm">Sort by</p>
             <select
@@ -271,16 +243,19 @@ const Shop = () => {
             >
               <option value="price">Price</option>
               <option value="rating">Rating</option>
-
+              {/* Add other sorting options as needed */}
             </select>
           </div>
         </div>
       )}
 
       <section className="container mb-5">
-        {isFetching ? (
-          <Skeleton grid={true} />
-        ) : data ? (
+        {isLoading && (
+          <div className="flex justify-center items-center min-h-[10vh]">
+            <div className="loader"></div>
+          </div>
+        )}
+        {data ? (
           <Products
             data={data}
             seeMoreBtn={false}
@@ -288,49 +263,49 @@ const Shop = () => {
             countProducts={16}
           />
         ) : (
-          <></>
-        )}
-        {!isLoading && (
-          <div className="flex justify-center">
-            <Pagination
-              count={totalPages}
-              shape="rounded"
-              page={page}
-              onChange={handlePageChange}
-              sx={{
-                "& .MuiPagination-ul": {
-                  display: "flex",
-                  gap: "30px",
-                  "& .Mui-selected": {
-                    backgroundColor: "#B88E2F",
-                    color: "#fff",
-                    fontWeight: "500",
-                  },
-                },
-                "& .MuiPaginationItem-root": {
-                  backgroundColor: "#F9F1E7",
-                  color: "#000",
-                  borderRadius: "8px",
-                  fontSize: "20px",
-                  height: "60px",
-                  width: "60px",
-                },
-                "@media (max-width: 600px)": {
-                  "& .MuiPaginationItem-root": {
-                    fontSize: "15px",
-                    height: "45px",
-                    width: "45px",
-                  },
-                  "& .MuiPagination-ul": {
-                    gap: "10px",
-                  },
-                },
-              }}
-            />
+          <div className="flex justify-center items-center">
+            <h2 className="text-4xl font-medium">No products found.</h2>
           </div>
         )}
+        <div className="flex justify-center">
+          <Pagination
+            count={totalPages}
+            shape="rounded"
+            page={page}
+            onChange={handlePageChange}
+            sx={{
+              "& .MuiPagination-ul": {
+                display: "flex",
+                gap: "30px",
+                "& .Mui-selected": {
+                  backgroundColor: "#B88E2F",
+                  color: "#fff",
+                  fontWeight: "500",
+                },
+              },
+              "& .MuiPaginationItem-root": {
+                backgroundColor: "#F9F1E7",
+                color: "#000",
+                borderRadius: "8px",
+                fontSize: "20px",
+                height: "60px",
+                width: "60px",
+              },
+              "@media (max-width: 600px)": {
+                "& .MuiPaginationItem-root": {
+                  fontSize: "15px",
+                  height: "45px",
+                  width: "45px",
+                },
+                "& .MuiPagination-ul": {
+                  gap: "10px",
+                },
+              },
+            }}
+          />
+        </div>
       </section>
-      <Info/>
+      <Info />
     </>
   );
 };
