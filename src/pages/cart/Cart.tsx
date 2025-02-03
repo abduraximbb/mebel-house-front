@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IoTrashOutline } from "react-icons/io5";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import empty_cart from "@/assets/images/empty_cart.jpg"
+import empty_cart from "@/assets/images/empty_cart.jpg";
 
 const Cart = () => {
   const cart = useSelector((state: RootState) => state.cart.value);
@@ -22,10 +22,7 @@ const Cart = () => {
   }, []);
   const subtotal = cart.reduce(
     (acc, product) =>
-
-      acc +
-
-      (product.price * product.amount) / (1 - product.discount / 100),
+      acc + (product.price * product.amount) / (1 - product.discount / 100),
     0
   );
 
@@ -33,7 +30,6 @@ const Cart = () => {
     (sum, product) => sum + product.price * product.amount,
     0
   );
-
 
   const handleCheckout = () => {
     token ? navigate("/checkout") : navigate("/auth/sign-in?q=checkout");
@@ -72,7 +68,6 @@ const Cart = () => {
           <table className="w-full table-auto text-left hidden md:table">
             <thead>
               <tr className="font-semibold text-base bg-slate-50 dark:bg-zinc-800">
-
                 <th className="px-4 py-3 text-center">Product</th>
                 <th className="px-4 py-3 text-center">Price</th>
                 <th className="px-4 py-3 text-center">Quantity</th>
@@ -101,17 +96,13 @@ const Cart = () => {
                       </p>
                     </td>
                     <td className="px-3 py-4 text-center text-black dark:text-white">
-                      Rs.{product.price.toFixed(2)}
+                      USD {product.price.toFixed(2)}
                     </td>
                     <td className="px-3 py-4 text-center">
                       <div className="flex items-center justify-between shadow-sm py-2 px-2 rounded-md">
-
                         <button
                           disabled={product.amount <= 1}
-
-                          onClick={() =>
-                            dispatch(decrementAmountCart(product))
-                          }
+                          onClick={() => dispatch(decrementAmountCart(product))}
                           className="text-[18px] px-3 py-2 rounded-md transition-all duration-300 
                             bg-gray-200 dark:bg-zinc-700 dark:text-white text-gray-700 
                             hover:bg-gray-300 dark:hover:bg-zinc-600 
@@ -124,31 +115,25 @@ const Cart = () => {
                           bg-white dark:bg-zinc-900 dark:text-white 
                           px-3 py-2"
                         >
-
                           {product.amount}
                         </span>
                         <button
                           disabled={product.stock <= product.amount}
-
-                          onClick={() =>
-                            dispatch(incrementAmountCart(product))
-                          }
+                          onClick={() => dispatch(incrementAmountCart(product))}
                           className="text-[18px] px-3 py-2 rounded-lg transition-all duration-300 
                                   bg-gray-200 dark:bg-zinc-700 dark:text-white text-gray-700 
                                   hover:bg-gray-300 dark:hover:bg-zinc-600 
                                   disabled:opacity-50"
-
                         >
                           +
                         </button>
                       </div>
                     </td>
                     <td className="px-3 py-4 text-center text-black dark:text-white">
-                      Rs.{(product.price * product.amount).toFixed(2)}
+                      USD {(product.price * product.amount).toFixed(2)}
                     </td>
                     <td className="px-3 py-4 text-center">
                       <button
-
                         onClick={() => dispatch(deleteCart(product))}
                         className="bg-[#B88E2F] text-white p-2 rounded-md hover:bg-[#a07424] transition"
                       >
@@ -171,13 +156,11 @@ const Cart = () => {
           </table>
 
           <div className="md:hidden md:p-4 py-4 sm:p-0">
-
             {cart.length > 0 ? (
               cart.map((product: ICartProduct) => (
                 <div
                   key={product.id}
                   className="border border-[#F9F1E7] dark:border-zinc-700 p-4 bg-white dark:bg-zinc-900 shadow-sm rounded-xl mb-4 flex flex-col gap-4 transition-transform max-sm:gap-1.5"
-
                 >
                   <div className="flex gap-6 items-center">
                     <img
@@ -192,7 +175,7 @@ const Cart = () => {
                         {product.name}
                       </p>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
-                        Rs. {product.price.toFixed(2)}
+                        USD  {product.price.toFixed(2)}
                       </p>
                     </div>
                   </div>
@@ -202,15 +185,10 @@ const Cart = () => {
                       Quantity:
                     </p>
                     <div className="flex items-center dark:bg-zinc-800 px-3 py-2 rounded-md shadow-sm">
-
                       <button
                         disabled={product.amount <= 1}
-
-                        onClick={() =>
-                          dispatch(decrementAmountCart(product))
-                        }
+                        onClick={() => dispatch(decrementAmountCart(product))}
                         className="text-xl px-3 py-1 rounded-md bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600 disabled:opacity-50 transition"
-
                       >
                         −
                       </button>
@@ -219,12 +197,8 @@ const Cart = () => {
                       </span>
                       <button
                         disabled={product.stock <= product.amount}
-
-                        onClick={() =>
-                          dispatch(incrementAmountCart(product))
-                        }
+                        onClick={() => dispatch(incrementAmountCart(product))}
                         className="text-xl px-3 py-1 rounded-lg bg-gray-200 dark:bg-zinc-700 hover:bg-gray-300 dark:hover:bg-zinc-600 disabled:opacity-50 transition"
-
                       >
                         +
                       </button>
@@ -232,18 +206,16 @@ const Cart = () => {
                   </div>
 
                   <div className="flex items-center justify-between ">
-
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       Subtotal:
                     </p>
                     <p className="text-lg font-semibold text-black dark:text-white">
-                      Rs. {(product.price * product.amount).toFixed(2)}
+                      USD  {(product.price * product.amount).toFixed(2)}
                     </p>
                   </div>
 
                   <div className="flex justify-end">
                     <button
-
                       onClick={() => dispatch(deleteCart(product))}
                       className="bg-[#B88E2F] text-white px-4 py-2 flex items-center gap-2 rounded-md hover:bg-red-600 transition shadow-md"
                     >
@@ -277,24 +249,20 @@ const Cart = () => {
 
         <div className="flex justify-between mb-6 max-sm:mb-4">
           <p className="text-lg font-bold text-black dark:text-white">
-
             Discounted Price (Total):
           </p>
           <p className="text-lg text-[#B88E2F] dark:text-[#FFD700]">
-            {(subtotal-total).toFixed(2)} USD
-
+            {(subtotal - total).toFixed(2)} USD
           </p>
         </div>
 
         <div
           onClick={handleCheckout}
-
           className="flex justify-center pt-10 max-sm:pt-4"
         >
           <button
             className="w-full py-3 text-lg font-semibold transition-all duration-300 border rounded-lg shadow-md text-white bg-bg-primary hover:opacity-85 active:scale-95 
            dark:bg-gray-800 dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-500 dark:text-gray-200 max-sm:text-[16px] max-sm:py-2"
-
           >
             Check Out
           </button>
@@ -305,4 +273,3 @@ const Cart = () => {
 };
 
 export default Cart;
-

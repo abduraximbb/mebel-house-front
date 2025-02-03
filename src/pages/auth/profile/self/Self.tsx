@@ -34,7 +34,6 @@ const Self = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      console.log(data);
       await updateClient({
         clientId: data?.client?.id,
         data: {
@@ -55,11 +54,11 @@ const Self = () => {
         isMobile ? "p-4" : "p-6"
       }`}
     >
-      <h2 className="text-2xl font-semibold mb-4">Mijoz Ma'lumotlari</h2>
+      <h2 className="text-2xl font-semibold mb-4">User Info</h2>
 
       {/* Ma'lumotlar yuklanayotganini ko'rsatish */}
       {isFetching ? (
-        <p className="text-gray-500">Ma'lumotlar yuklanmoqda...</p>
+        <p className="text-gray-500">Info uploading...</p>
       ) : isEditing ? (
         <form onSubmit={handleSubmit} className="flex flex-col gap-2">
           <label>
@@ -95,7 +94,7 @@ const Self = () => {
           <div className="flex gap-2 mt-4">
             <button
               type="submit"
-              className="py-2 px-4 bg-green-500 text-white rounded-md"
+              className="py-2 px-4 bg-bg-primary text-white rounded-md"
             >
               Save
             </button>
