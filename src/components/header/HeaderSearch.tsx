@@ -18,7 +18,7 @@ const HeaderSearch: FC<{ searchOpen: boolean; setSearchOpen: any }> = ({
     setSearchOpen(false);
   };
   const ref = useOutsideClick(handleClear);
-  const debouncedValue = useDebounce(value.trim());
+  const debouncedValue = useDebounce(value.trim().toLocaleLowerCase());
   const { data, isSuccess, isFetching } = useGetProductsQuery(
     { limit: 10, filter: debouncedValue },
     { skip: !debouncedValue }

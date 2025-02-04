@@ -50,7 +50,10 @@ export const cartSlice = createSlice({
       );
       localStorage.setItem("cart", JSON.stringify(state.value));
     },
-    clearCart() {},
+    clearCart(state) {
+      state.value = [];
+      localStorage.removeItem("cart");
+    },
   },
 });
 

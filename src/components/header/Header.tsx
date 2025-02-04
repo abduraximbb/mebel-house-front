@@ -97,15 +97,14 @@ const Header: FC = () => {
               </span>
             )}
           </NavLink>
-         <NavLink to={"/cart"} className={"relative"}>
+          <NavLink to={"/cart"} className={"relative"}>
             {!!cartTotal && (
               <span className="absolute max-[986px]:hidden top-[-5px] right-[-5px] bg-bg-primary  w-4 rounded-full text-white flex items-center justify-center text-[12px] h-4">
                 {cartTotal}
               </span>
             )}
-            <AiOutlineShoppingCart className="h-6 w-6 hover:text-bg-primary duration-200 max-[986px]:hidden" />
+            <AiOutlineShoppingCart className="h-6 w-6 hover:text-bg-primary duration-200 max-[986px]:hidden text-gray-800 dark:text-white" />
           </NavLink>
-
 
           <NavLink to={token ? "/auth/profile" : "/auth/sign-in"}>
             {isSuccess ? (
@@ -117,10 +116,9 @@ const Header: FC = () => {
             )}
           </NavLink>
           <div className="flex items-center gap-6">
-          <ThemeToggle /> 
-          </div> 
+            <ThemeToggle />
+          </div>
 
-          
           <MdMenu
             className="h-6 w-6 min-[987px]:hidden hover:text-bg-primary duration-200 cursor-pointer text-gray-800 dark:text-white"
             onClick={() => setMenuOpen((prev) => !prev)}
@@ -131,7 +129,9 @@ const Header: FC = () => {
       {menuOpen && (
         <div className="absolute  container top-20 border-t w-1/2 right-0 bg-white dark:bg-zinc-950 shadow-md z-50">
           <div className="flex justify-between items-center p-4">
-            <h2 className="text-lg font-bold text-gray-800 dark:text-white">Menu</h2>
+            <h2 className="text-lg font-bold text-gray-800 dark:text-white">
+              Menu
+            </h2>
             <button
               onClick={() => setMenuOpen(false)}
               className="text-gray-600 hover:text-white dark:text-white"

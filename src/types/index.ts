@@ -35,8 +35,8 @@ export interface ICustomer {
   full_name: string;
   phone_number: string;
   email: string;
-  password: string;
-  confirm_password: string;
+  password?: string;
+  confirm_password?: string;
 }
 
 export interface ISignInCustomer {

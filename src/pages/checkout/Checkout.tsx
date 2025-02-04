@@ -3,11 +3,12 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useCheckTokenQuery } from "@/redux/api/customer-api";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux";
 import { useCreateOrderMutation } from "../../redux/api/order-api";
 import { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
+import { clearCart } from "../../redux/features/cart-slice";
 
 const schema = yup
   .object({
@@ -22,6 +23,7 @@ const schema = yup
   .required();
 
 const Checkout = () => {
+  const dispatch = useDispatch()
   const { data } = useCheckTokenQuery(null);
   const cart = useSelector((state: RootState) => state.cart.value);
   const token = useSelector((state: RootState) => state.token.access_token);
@@ -63,9 +65,21 @@ const Checkout = () => {
       total_price,
     };
 
-    createOrder(order);
-    reset();
-    return navigate("/auth/profile/self");
+    // createOrder(order);
+    // reset();
+    // deleteCart()
+    // return navigate("/auth/profile/self");
+
+     createOrder(order)
+      .unwrap()
+      .then(() => {
+        navigate("/auth/profile/order");
+        setTimeout(() => {
+          dispatch(clearCart());
+          reset();
+        }, 250);
+      })
+      .catch((e) => console.log(e));
   };
 
   return !token ? (

@@ -37,6 +37,13 @@ const extendedApi = mainApi.injectEndpoints({
         body,
       }),
     }),
+    updateCustomer: build.mutation<any, { clientId: string; data: ICustomer }>({
+      query: ({ clientId, data }) => ({
+        url: `client/${clientId}`,
+        method: "PATCH",
+        body: data,
+      }),
+    }),
   }),
 });
 
@@ -45,5 +52,6 @@ export const {
   useCreateOtpMutation,
   useVerifyOtpMutation,
   useCheckTokenQuery,
-  useSignInCustomerMutation
+  useSignInCustomerMutation,
+  useUpdateCustomerMutation,
 } = extendedApi;
