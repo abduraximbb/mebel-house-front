@@ -22,7 +22,7 @@ const Profile = () => {
         <span className="flex-1"></span>
         <button
           onClick={handleLogOut}
-          className="p-2 block bg-slate-900 rounded-md text-white"
+          className="p-2 block bg-slate-900 rounded-md text-white hover-bg-primary"
         >
           Log out
         </button>

@@ -62,6 +62,9 @@
 // };
 
 // export default React.memo(CartButton);
+
+
+
 import { RootState } from "@/redux";
 import { addCart, deleteCart } from "@/redux/features/cart-slice";
 import { IProduct } from "@/types";
@@ -93,10 +96,12 @@ const CartButton = ({ product }: { product: IProduct }) => {
   return (
     <button
       onClick={handleCart}
-      className="bg-white p-2 rounded text-primary hover:bg-primary-light transition"
+      className={`p-2 rounded transition ${
+        isInCart ? "bg-primary text-white" : "bg-white text-black hover:bg-primary-light"
+      }`}
     >
       {isInCart ? (
-        <IoCart className="text-lg text-primary" />
+        <IoCart className="text-lg text-bg-primary" />
       ) : (
         <IoCartOutline className="text-lg text-black" />
       )}

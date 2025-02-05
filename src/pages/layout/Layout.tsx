@@ -17,7 +17,7 @@ const Layout = () => {
     <div className="bg-white dark:bg-gray-900 text-black dark:text-white min-h-screen">
       <NetworkStatus />
       <Header />
-      <main className="p-4">
+      <main>
         <Outlet />
       </main>
       <Footer />
